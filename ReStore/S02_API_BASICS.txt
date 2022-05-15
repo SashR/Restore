@@ -1,0 +1,64 @@
+*************               Lesson 6: Create .NET solution and API project              **************
+-- Check .net runtime and version info
+dotnet --info
+
+-- Check .net project templates list
+dotnet new -l
+
+-- Create new dotnet solution file
+dotnet new sln
+
+-- Create .net webapi project
+dotnet new webapi -o <Folder Name>
+-o creates output directory
+
+-- Add project to solution file
+dotnet sln add <Folder Name>
+
+-- Run project (from inside API project)
+dotnet run
+-- Creates https an http link
+-- Go to link/swagger to see UI for API documentation
+
+
+
+*************               Lesson 7: Adding VSCode extensions                        **************
+Added extensions for C#, Nuget, and file icons. Also bracket coloring
+
+*************               Lesson 8: .NET 6 Project Changes                          **************
+-- Program.cs and Startup.cs files were changed
+-- Also WeatherForecast.cs and WeatherForecastController.cs
+
+
+*************               Lesson 9: Whats in the web API template                   **************
+-- Application runs on https://localhost:7210 and http://localhost:5164. This is determined inside the
+    /Properties/LaunchSettings.json file. Under profiles.API the data configuration is there.
+    To keep things simple it can be better to just run on http.
+-- The following command watches code for changes and reloads
+dotnet watch run
+
+-- Program.cs class : Any dotnet app will have this file.
+    - This always has a Main method, which the dotnet app will look for when it starts, and executes it.
+        The code inside the method creates a Kestrel server with basic settings for running the server.
+-- Startup.cs Class : configuration initialized here.
+    - The ConfigureServices method is often reffered as the Dependency Injection Container. All custom
+        or provided sevices will need to be registered here.
+    - The Configure method is for middleware for the application. Middle adds layers to our application
+        that a clients request may need to pass through before hitting the business logic.
+    - Controllers contain the business logic and endpoints for those logic
+-- appsettings.json: Stored configurations as json. Development file runs only in  development mode. 
+
+
+
+*************               Lesson 10: Create a new C# class for the product        **************
+-- A product entity is essential for an E-Commerce Store
+-- We store our entities in an /API/Entities folder. Right Click and add a new Product class
+-- We need to now add properties of the Product (attributes)
+-- Shortcut for creating property is prop + TAB
+-- NOTE - Stripe uses long data type for prices
+
+
+*************               Lesson 11: What is an entity framework                  **************
+*************               Lesson 12: Adding the DBContext class                   **************
+
+
