@@ -60,12 +60,62 @@ dotnet watch run
 
 
 *************               Lesson 11: What is an entity framework                  **************
-
+-- This is a ORM for .NET, similar to Eloquent for Laravel
+-- ORMs save us from having to managing connections, writing SQL queries, etc whenever we want
+    to interact with the DB
+-- DBContext manages connections to the databases. DBSets represents tables in the databases
+-- C# LINQ functionality allows for querying the data. The ORM converts to SQL, fetches data
+    and converts it to C# objects.
+-- Features include Modelling, Querying, Change Tracking, Saving, Optimistic Concurrency,
+    Transaction Management, Caching, Built-in Conventions (proprty id of Product class becomes
+    PK of products table), Migrations
 
 
 
 *************               Lesson 12: Adding the DBContext class                   **************
-*************               Lesson 13:                   **************
-*************               Lesson 14:                   **************
+-- Need to use Nuget gallery. CNTRL+SHFT+P, Open Nuget gallery, find MS entity framework, install
+    core.sqlite and core.design. The .csproj File will get updated. Like a composer-lock file.
+-- Create a new folder /API/Data. All data related classes go here. Inside here create a StoreContext 
+    class. It needs to extend DbContext, which represents a session with a DB. It can be used to 
+    query and store instances of entities. Create a constructor with options, which are the DB
+    credentials.
+-- Now for each entity we need to create a DB set.
+public DbSet<Product> Products {get; set;}
+-- Now in the Startup.cs class, we need to add the DbContext as a service. Inside ConfigurationServices
+    method:
+services.AddDbContext<StoreContext>(opt => 
+{
+    opt.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));
+});
+-- Now inside our appsettings.development file, we need add the following to the root object
+  "ConnectionStrings": {
+    "DefaultConnection": "Data source=store.db"
+  }
+  This is simple for sqlite
+
+
+
+*************               Lesson 13: Creating an Entity Framework Migration       **************
+-- We need the database file. Currently we have almost enough to create a db with a products table.
+-- The tool needed is dotnet-ef. Find site via google, site provides command for installing it.
+    The version needs to match your ef version. Run dontent tool update if you need to update the
+    version.
+    Run "dotnet ef" to check list of commands. There are those for manging database, DbContext, and
+    migrations. 
+    We need to run "dotnet ef migrations add InitialCreate -o Data/Migrations"
+    This should create a migrations folder, with a migration, designer, and snapshot file.
+    The Migration file has an up and a down method. The create command already exists.
+    Running this code will create a db with the products table.
+    Done via "dotnet ef database update" -- creates db if it doesnt exist, runs migrations
+    An Ef migrations histroy file is used to keep track of which migrations already ran.
+    The SQL queries are shown in the console.
+-- Use the command palette to open the sqlite db, which can then be accessed from the explorer window.
+    It has the products table, but it is empty
+
+
+*************               Lesson 14: Seed data into the database                  **************
+*************               Lesson 15:                   **************
+*************               Lesson 16:                   **************
+*************               Lesson 17:                   **************
 
 
