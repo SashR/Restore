@@ -58,7 +58,14 @@ dotnet watch run
 -- NOTE - Stripe uses long data type for prices
 
 
+
 *************               Lesson 11: What is an entity framework                  **************
+
+
+
+
 *************               Lesson 12: Adding the DBContext class                   **************
+*************               Lesson 13:                   **************
+*************               Lesson 14:                   **************
 
 
