@@ -114,8 +114,28 @@ services.AddDbContext<StoreContext>(opt =>
 
 
 *************               Lesson 14: Seed data into the database                  **************
-*************               Lesson 15:                   **************
-*************               Lesson 16:                   **************
-*************               Lesson 17:                   **************
+-- Create /Data/DbInitializer class to create a list of products, add them to the db, then save it.
+-- Seed allows us to easily recreate dummy data in our database when sharing the project
+-- Static classes remove the need to create a new instance to use the class
+-- Need to enable Omnisharp import completion on c# tools
+-- Need to inject StoreContext to the function. We should exit if we already have data in the DB,
+    check via context.Products.Any()
+
+
+
+*************               Lesson 15: Program.cS to migrate & seed on startup      **************
+-- Changes will be done in the Main method
+-- We should setup some exception handling inside here via try catch
+-- context.Database.Migrate() migrates data
+-- DbInitializer.Initialize(context);  // Seeding
+-- The using keyword will automatically destroy unneeded data
+
+-- Delete database with 'dotnet ef database drop'
+-- Now run dotnet watch run, the db should be created and seeded. Our db should now have data in
+    it
+
+*************               Lesson 16: Products Controller                          **************
+*************               Lesson 17: Async methods and querying the DB            **************
+*************               Lesson 18: Saving code to source control                **************
 
 
