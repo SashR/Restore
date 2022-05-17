@@ -135,7 +135,43 @@ services.AddDbContext<StoreContext>(opt =>
     it
 
 *************               Lesson 16: Products Controller                          **************
-*************               Lesson 17: Async methods and querying the DB            **************
-*************               Lesson 18: Saving code to source control                **************
+-- All controllers need the [ApiController] attributes, it also needs a [Route] and derives from ControllerBase
+-- Create new class inside controllers -- /Controllers/ProductsController.cs
+-- [Route("api/[controller]")]
+-- Shortcut for generating a constructor is ctor + tab. We need to inject the storeContext. Write click and create
+    a private read only file. Set the context equal to that. We can now read data from the context
 
+-- To create an endpoint we need to specify the http method [HttpGet] above the controller method that
+    will handle the request. 
+public ActionResult<List<Product>> GetProducts()
+-- The return value is a type of ActionResult, which is a type of List, which is a type of Product
+-- Use Find method to fetch a single product
+-- Endpoints can be tested on swagger
+-- Currently we are fetching data synchronously
+
+
+*************               Lesson 17: Async methods and querying the DB            **************
+-- Synchronous querying is not best practice as the time could take too long. The problem is that currently operations
+    are single-threaded. This is fine on small apps. But if our server has many concurrent users, there may be latency
+    issues. 
+-- Most web-servers are multi-threaded, but they will eventually reach a limit. Users may be timed out then.
+-- It is best practice to make requests to the database as asynchronous
+
+-- We need to make the methods asynchronous, via the async keyword.
+-- Our return value will be of type Task, which wraps around the actual return type (ActionResult<Product>)
+-- We should now add await before any expression that interacts with the context(DB)
+-- Note that methods will need to be changed with their async equivalent (ToList() to ToListAsync())
+-- Add using Microsoft.EntityFrameworkCore; -> will lead to error without it as not async methods could be found
+
+-- Best practice to start with _ for private read-only fields. Go to C# extensions settings, private member prefix and set
+    it to an underscore, all toggle the use this(last field)
+-- Done for API for now
+
+
+
+*************               Lesson 18: Saving code to source control                **************
+-- We can ignore some basic files
+-- dotnet new gitignore -> generates basics gitignore file
+-- We should also exclude the appsettings.json, since we would store passwords and keys here
+-- 
 
