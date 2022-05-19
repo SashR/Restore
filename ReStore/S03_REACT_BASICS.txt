@@ -1,0 +1,15 @@
+*************               Lesson 20: INTRO				                 **************
+*************               Lesson 21: Creating the React App		                 **************
+-- Inside ReStore folder run npx create-react-app client --template typescript --use-npm
+-- ts.config.json file is needed for compiling TS
+-- npm start to build and run the client app
+
+*************               Lesson 22: Whats in the template	 	                 **************
+-- public/index.html is the entrypoint for the application. Change the title here.
+-- cra tooling adds script imports to the file
+-- index.tsx calls ReactDOM.render and renders the base App component in react strict mode
+-- React has hot reloading
+-- Replace everything with a h1 tag and Restore
+
+*************               Lesson 23: React Component basics		                 **************
+*************               Lesson 24: useState Hook			                 **************
