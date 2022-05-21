@@ -32,3 +32,9 @@
 
 *************               Lesson 27: TS vs JS in React			                 **************
 -- TS is a superset of JS, hence all normal JS code can run perfectly fine in TS
+-- Syntax errors like just naming a property of an object incorrectly gets caught by TS,
+    while this shows as a runtime error in JS
+    TS shows an error both on the IDE and in the browser. In JS things can fail silently.
+    TS can infer from our code what types are being used i.e. the shape of objects.
+    Sometimes type safety is not worth the advantage
+    It is worth it for Products, as this is a fundemantal entity in our API
