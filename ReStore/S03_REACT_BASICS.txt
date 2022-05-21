@@ -12,4 +12,11 @@
 -- Replace everything with a h1 tag and Restore
 
 *************               Lesson 23: React Component basics		                 **************
+-- Very basic stuff -- basic styling
+-- Vasic array displaying using .map
+
+*************               Lesson 24: useState Hook			                 **************
+-- Basic state manipulations 
+
+*************               Lesson 25: useEffect Hook			                 **************
 *************               Lesson 24: useState Hook			                 **************
