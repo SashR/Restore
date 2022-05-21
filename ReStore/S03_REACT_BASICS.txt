@@ -19,4 +19,16 @@
 -- Basic state manipulations 
 
 *************               Lesson 25: useEffect Hook			                 **************
-*************               Lesson 24: useState Hook			                 **************
+*************               Lesson 26: API CORS Configurations			                 **************
+-- Go to Startup class. Goal is to send back a header with CORS information
+-- Service registering
+            services.AddCors();
+
+-- Middleware registering
+            app.UseCors(opt => {
+                opt.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000");
+            });
+
+
+*************               Lesson 27: TS vs JS in React			                 **************
+-- TS is a superset of JS, hence all normal JS code can run perfectly fine in TS
