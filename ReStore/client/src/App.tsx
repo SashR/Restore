@@ -1,19 +1,20 @@
 import { useEffect, useState } from "react";
 import "./App.css";
+import { Product } from "./product";
 
 function App() {
-  const [products, setProducts] = useState([
-    {name: 'Product1', price: 100.00, key:"1"},
-    {name: 'Product2', price: 200.00, key:"2"},
-  ]);
+  const [products, setProducts] = useState<Product[]>([]);
 
   // Add a product to the products list
   const addProduct = () => {
-    setProducts(prods => [...prods, ({
-      name: `Product${prods.length+1}`, 
-      price: (prods.length+1)*100.00, 
-      key:`${(prods.length+1)}`})
-    ])
+    setProducts(prevState => [...prevState, {
+      name: `Product${prevState.length+1}`, 
+      price: (prevState.length+1)*100.00, 
+      id:prevState.length+1,
+      description: "some description",
+      pictureUrl: "http://picsum.photo/200",
+      brand: "some brand"
+    }])
   };
 
   // fetch data from api
@@ -37,10 +38,10 @@ function App() {
     <div>
       <h1>Restore</h1>
       <ul>
-        {products.map(prod => (
-          <li key={prod.key}>
-            <div> <b>Name:</b> {prod.name} </div> 
-            <div> <b>Price:</b> {prod.price} </div> 
+        {products.map(product => (
+          <li key={product.id}>
+            <div> <b>Name:</b> {product.name} </div> 
+            <div> <b>Price:</b> {product.price} </div> 
           </li>
         ))}
       </ul>

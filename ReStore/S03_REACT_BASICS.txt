@@ -38,3 +38,15 @@
     TS can infer from our code what types are being used i.e. the shape of objects.
     Sometimes type safety is not worth the advantage
     It is worth it for Products, as this is a fundemantal entity in our API
+
+*************               Lesson 28: Adding a TS interface for the products          **************
+-- This can allow TS to be aware of the shape of our product object
+-- This is needed because we will not be setting any default data for TS to infer
+-- Inside our source folder create a product.ts file
+-- We can use a json to ts converter to get a shape to avoid any typos
+-- We can specify a type for useState by passing in an interface or builtin type inside angle brackets
+-- The square brackets there indicate that it is an array of that type
+useState<Product[]>([]);
+-- We do however get an error relating to the add product function since our adding object does not
+    match the shape that typescript is expecting.
+-- We can mark a property as optional via a ? next to its name in the interface file
