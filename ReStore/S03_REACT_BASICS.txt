@@ -50,3 +50,17 @@ useState<Product[]>([]);
 -- We do however get an error relating to the add product function since our adding object does not
     match the shape that typescript is expecting.
 -- We can mark a property as optional via a ? next to its name in the interface file
+
+
+*************               Lesson 29: File and Folder organization                  **************
+-- Options are seperating code based on features(preffered), or based on files
+-- The folder structure should go inside source. Folders:
+-- src
+    -- app (application wide code)
+        -- layout (layout related code)
+        -- models (TS types)
+    -- features
+-- delete app.test.tsx, no testing will be done.
+-- dele logo.svg, not being used
+-- tsconfig.js handles compilation of TS into ES5. Strict set to true keeps TS checking
+-- vscode might show an error but TS compiler might not. TS compiler is more reliable. Just reload vscode.
