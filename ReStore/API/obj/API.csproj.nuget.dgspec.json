@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\sashi\\Desktop\\Development\\.net Ecommerce App\\ReStore\\API\\API.csproj": {}
+    "C:\\Users\\sashi\\Desktop\\Development\\Restore NoCommit\\Restore\\ReStore\\API\\API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\sashi\\Desktop\\Development\\.net Ecommerce App\\ReStore\\API\\API.csproj": {
+    "C:\\Users\\sashi\\Desktop\\Development\\Restore NoCommit\\Restore\\ReStore\\API\\API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\sashi\\Desktop\\Development\\.net Ecommerce App\\ReStore\\API\\API.csproj",
+        "projectUniqueName": "C:\\Users\\sashi\\Desktop\\Development\\Restore NoCommit\\Restore\\ReStore\\API\\API.csproj",
         "projectName": "API",
-        "projectPath": "C:\\Users\\sashi\\Desktop\\Development\\.net Ecommerce App\\ReStore\\API\\API.csproj",
+        "projectPath": "C:\\Users\\sashi\\Desktop\\Development\\Restore NoCommit\\Restore\\ReStore\\API\\API.csproj",
         "packagesPath": "C:\\Users\\sashi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\sashi\\Desktop\\Development\\.net Ecommerce App\\ReStore\\API\\obj\\",
+        "outputPath": "C:\\Users\\sashi\\Desktop\\Development\\Restore NoCommit\\Restore\\ReStore\\API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\sashi\\AppData\\Roaming\\NuGet\\NuGet.Config"

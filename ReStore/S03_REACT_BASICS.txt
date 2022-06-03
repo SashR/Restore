@@ -64,3 +64,69 @@ useState<Product[]>([]);
 -- dele logo.svg, not being used
 -- tsconfig.js handles compilation of TS into ES5. Strict set to true keeps TS checking
 -- vscode might show an error but TS compiler might not. TS compiler is more reliable. Just reload vscode.
+
+
+
+
+*************               Lesson 30: Adding react components                     **************
+-- React is used due to its ability to create a component hierarchy and the reusability of components.
+-- For example we may want to have a card for products.
+-- For now our state should be in App, we will connect to the other components via drilling/raising
+-- Add features folder under source. Create catalog folder and Catalog.tsx file
+-- Use React Fragment
+-- We need to be explicit about the type of props
+const Catalog = (props: any) => { ...
+-- This makes it equivalent to a JS script property with no set type, we can change this type later
+-- However we have lost the benefits of TS.
+-- To get it back, we should create an interface for Props, and implement it on props.
+-- Now props should obey this shape
+interface Props {
+    products: Product[],
+    addProduct: () => void,  // function that returns void
+}
+
+const Catalog = (props: Props) => {
+-- This is great because we can define required or unrequired props. If we forget to pass anything, we get
+    an error
+-- Also nice to destructure props
+
+
+
+*************               Lesson 31: Adding Material using                       **************
+-- Go to material ui and follow installation steps
+-- need to run npm i @emotion/react otherwise there will be errors
+-- Add roboto font link in index.html file
+-- Add images from initial folder to client/public folder 
+
+*************               Lesson 32: Adding Products List and Card               **************
+-- Product list updates is very simple, all we have to do is move the <List> and everything inside it, then just make sure that
+    the imports are cool and the data is passing through from <Catalog> to <ProductList>
+-- ProductCard is also easy, just separate the <ListItem>, sort out imports and data
+
+
+*************               Lesson 33: Installing and Using React DevTools         **************
+-- Install react devtools from chrome add ons
+-- Should add Profile and Components tabes to the chrome devtools
+
+
+*************               Lesson 34: Adding an AppBar                            **************
+-- Very Simple, just copy basic elements for AppBar into a /Layout/Header.tsx file
+-- Replacing the heading in App.tsx with this.
+-- We can also add a <CssBaseline /> componet to remove all default css
+-- Put Catalog component inside a Container component, looks nicer
+
+
+
+*************               Lesson 35: Add cards for each product                  **************
+-- We will use the material UI grid system to layout cards
+-- Copy media card example into ProductCard
+-- Adjust code accordingly
+-- Replace list in ProductList with Grid
+-- Spacing is dependent on theming
+-- Also place all prodcuts inside a Grid item
+-- Remove max width from card
+-- Add margin to appbar in Header
+-- sx prop for material ui is a shortcut to add custom css
+
+
+*************               Lesson 36: Styling the product card                    **************
