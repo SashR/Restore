@@ -130,3 +130,10 @@ const Catalog = (props: Props) => {
 
 
 *************               Lesson 36: Styling the product card                    **************
+-- xs prop on Grid items control how many columns (out of 12) get used
+-- Add CardHeader to Card
+
+*************               Lesson 37: Styling the product card                    **************
+*************               Lesson 38: Styling the product card                    **************
+*************               Lesson 39: Styling the product card                    **************
+*************               Lesson 40: Styling the product card                    **************
