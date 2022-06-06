@@ -1,51 +1,58 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./App.css";
-import { Product } from "../models/product";
 import Catalog from "../features/catalog/Catalog";
 import Header from "./Header";
-import { Container, CssBaseline } from "@mui/material";
+import { Container, createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+  },
+});
+
+const customTheme = createTheme({
+  palette: {
+    primary: {
+      // light: will be calculated from palette.primary.main,
+      main: '#31a949',
+      // dark: will be calculated from palette.primary.main,
+      // contrastText: will be calculated to contrast with palette.primary.main
+    },
+    secondary: {
+      light: '#7aa5e6',
+      main: '#4362ba',
+      // dark: will be calculated from palette.secondary.main,
+      contrastText: '#ffcc00',
+    },
+    // Used by `getContrastText()` to maximize the contrast between
+    // the background and the text.
+    contrastThreshold: 3,
+    // Used by the functions below to shift a color's luminance by approximately
+    // two indexes within its tonal palette.
+    // E.g., shift from Red 500 to Red 300 or Red 700.
+    tonalOffset: 0.2,
+    background: {
+      default: "#eaeaea",
+    },
+  },
+});
 
 function App() {
-  const [products, setProducts] = useState<Product[]>([]);
+  const [theme, setTheme] = useState<Boolean>(false);
 
-  // Add a product to the products list
-  const addProduct = () => {
-    setProducts(prevState => [...prevState, {
-      name: `Product${prevState.length+1}`, 
-      price: (prevState.length+1)*100.00, 
-      id:prevState.length+1,
-      description: "some description",
-      pictureUrl: "http://picsum.photo/200",
-      brand: "some brand"
-    }])
-  };
-
-  // fetch data from api
-  const fetchProducts = async () => {
-    console.log("REQUESTED");
-    try {
-      const req = await fetch('http://localhost:5000/api/products');
-      const resp = await req.json();
-      setProducts(resp);
-    } catch(e){
-      console.log(e);
-    }
-  };
-
-  // Call for data from server, no dependencies
-  useEffect(()=>{
-    fetchProducts();
-  }, [])
+  // Change
+  const onChangeTheme = () => {
+    setTheme(currTheme=> !currTheme);
+  }
 
   return (
-    <div>
+    <ThemeProvider theme={theme ? darkTheme : customTheme}>
       <CssBaseline />
-      <Header />
+      <Header theme={theme} setTheme={onChangeTheme} />
       <Container>
-        <Catalog products={products} addProduct={addProduct} />
+        <Catalog />
       </Container>
-    </div>
+    </ThemeProvider>
   );
 }
 

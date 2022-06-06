@@ -1331,11 +1331,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\sashi\\Desktop\\Development\\Restore NoCommit\\Restore\\ReStore\\API\\API.csproj",
+      "projectUniqueName": "C:\\Users\\sashi\\Downloads\\restore\\Restore\\ReStore\\api\\API.csproj",
       "projectName": "API",
-      "projectPath": "C:\\Users\\sashi\\Desktop\\Development\\Restore NoCommit\\Restore\\ReStore\\API\\API.csproj",
+      "projectPath": "C:\\Users\\sashi\\Downloads\\restore\\Restore\\ReStore\\api\\API.csproj",
       "packagesPath": "C:\\Users\\sashi\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\sashi\\Desktop\\Development\\Restore NoCommit\\Restore\\ReStore\\API\\obj\\",
+      "outputPath": "C:\\Users\\sashi\\Downloads\\restore\\Restore\\ReStore\\api\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\sashi\\AppData\\Roaming\\NuGet\\NuGet.Config"

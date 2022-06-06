@@ -1,0 +1,6 @@
+*************               Lesson 40: Introduction                    **************
+-- A SPA is just a single page (duh)
+-- A movement on our app usually means transitioning between high level components
+-- To map these transitions so the browser can track them (history, url), we need a router library
+-- The defacto router library is React router
+-- Also going to install axios, a better API than built in fetch
