@@ -2,6 +2,7 @@ import { Product } from "../../models/product";
 import Button from '@mui/material/Button';
 import ProductList from "./ProductList";
 import { useState, useEffect } from "react";
+import { Typography } from "@mui/material";
 
 const Catalog = () => {
     const [products, setProducts] = useState<Product[]>([]);
@@ -24,7 +25,7 @@ const Catalog = () => {
 
     return (
         <>
-            <h1 style={{marginTop:100}}> Catalog </h1>
+            <Typography sx={{marginTop:10, marginBottom: 4}} variant="h2"> Catalog </Typography>
             <ProductList products={products} />
             <Button variant="contained" >Add product</Button>
         </>
