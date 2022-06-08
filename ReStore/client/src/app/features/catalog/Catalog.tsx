@@ -3,6 +3,7 @@ import Button from '@mui/material/Button';
 import ProductList from "./ProductList";
 import { useState, useEffect } from "react";
 import { Typography } from "@mui/material";
+import axios from "axios";
 
 const Catalog = () => {
     const [products, setProducts] = useState<Product[]>([]);
@@ -10,7 +11,7 @@ const Catalog = () => {
     // fetch data from api
     const fetchProducts = async () => {
     try {
-      const req = await fetch('http://localhost:5000/api/products');
+      const req = await axios.get('http://localhost:5000/api/products');
       const resp = await req.json();
       setProducts(resp);
     } catch(e){
