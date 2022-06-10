@@ -1,0 +1,68 @@
+*************               Lesson 47: Introduction                    **************
+-- Very important concept. Any action that is available for the user needs to have fdbk,
+-- This is key to a good user experience
+-- If there are server issues, the user needs to be notified
+-- For forms, if the user enters incorrect/invalid data, they need to be made aware of this
+-- What will be covered?
+    - Error handling and exceptions,
+    - Developer exception pages,
+    - Middleware,
+    - Http response errors,
+    - Client side error handling,
+    - Debugging,
+
+-- When you make an error in your API, you usually get an exception message as well as a stack
+    trace that points all of the different layers the lead to the error. 999 times out of 1000, the 
+    top level trace and the message are vital to solving the issue at hand.
+    - The trace points to the relevant class and line of code.
+
+-- In the Startup.cs class and the Configure method:
+app.UseDeveloperExceptionPage();    // Current handles API exceptions
+
+-- Typical Middleware ordering:
+    - ExceptionHandler
+        - HSTS
+            - HttpsReirection
+                - Static Files
+                    - Routing  
+                        - CORS
+                            - Authentication
+                                -Authorization  => Custom1  => Custom2  => Endpoint
+
+    - Exception handling at the top, needed to catch any exceptions that occur lower down the hierarchy
+
+
+-- HTTP response:
+    - 200 Range         => Ok
+    - 300 Range         => Redirection
+    - 400 Range         => Client Error (404 - Not found enpoint)
+    - 500 Range         => Server Error (e.g. 503 - Server not available, too busy)(500 - Internal error)
+
+-- Client side error handling:
+    - Toast notifications
+    - Console errors
+    - Error pages (Client pages, and Developer view)
+    - Validation errors
+
+
+*************               Lesson 48: Setting up and Error Controller                    **************
+-- We need as much info as possible about errors to be able to quickly and succintly resolve it.
+-- We need to create a controller to serve Http responses and exceptions
+-- We will apply inheritance to apply DRY principle
+-- Create class BaseApiController.cs
+-- Switch code, now derive from this for ProductsController
+-- Create a BuggyController and derive from BaseApiController
+-- BuggyController has routes that represent exceptions (GetBadRequest) and returns a instance of
+    this exception using the relevant exception class
+
+*************               Lesson 49: Adding exception handling middleware                    **************
+*************               Lesson 50: Introduction                    **************
+*************               Lesson 47: Introduction                    **************
+*************               Lesson 47: Introduction                    **************
+*************               Lesson 47: Introduction                    **************
+
+
+
+
+
+
