@@ -61,11 +61,17 @@ app.UseDeveloperExceptionPage();    // Current handles API exceptions
 -- create a new folder middleware, and a class exception middleware
 public ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddleware> logger, IHostEnvironment env)
 -- It needs an async InvokeAsync method, and then generate json data
-10:04
 ***** Go through Again
 -- Register middleware in Startup Class
 
 *************               Lesson 50: Centralizing the axios request                 **************
+-- We want to centralize all axios code, making easier to centralize queries.
+-- Axios has the ability to intercept requests on the way out/in client
+-- Create /app/api/agent.ts file
+-- lower cases names for non react component files
+-- The file will provide and intermediate interface with axios to allow for easy connections,
+    while also making the capabilities much more scalable.
+5:37
 
 
 *************               Lesson 47: Introduction                    **************
