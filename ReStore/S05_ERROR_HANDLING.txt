@@ -56,7 +56,18 @@ app.UseDeveloperExceptionPage();    // Current handles API exceptions
     this exception using the relevant exception class
 
 *************               Lesson 49: Adding exception handling middleware                    **************
-*************               Lesson 50: Introduction                    **************
+-- We will be creating our own middleware for handling exceptions (similar to app.UseDeveloperExceptionPage())
+-- Eceptions get passed up the middleware tree until it gets to the exeption handler middleware
+-- create a new folder middleware, and a class exception middleware
+public ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddleware> logger, IHostEnvironment env)
+-- It needs an async InvokeAsync method, and then generate json data
+10:04
+***** Go through Again
+-- Register middleware in Startup Class
+
+*************               Lesson 50: Centralizing the axios request                 **************
+
+
 *************               Lesson 47: Introduction                    **************
 *************               Lesson 47: Introduction                    **************
 *************               Lesson 47: Introduction                    **************
