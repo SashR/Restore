@@ -80,7 +80,17 @@ public ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddleware> lo
 Changes made to this file, agent.ts, Catalog.tsx and ProductDetailsPage.tsx
 
 *************               Lesson 51: React component for error testing                    **************
+-- We will use the about page for now
+-- Add some buttons that call your dummy buggy api methods
+-- Our products controller is not throwing correct errors, not throwing an error at all
+
+
+Changes made to this file, AboutPage.tsx, ProductsController, ProductDetailsPage
+
 *************               Lesson 52: Using axios intercepters                    **************
+
+
+
 *************               Lesson 53: Adding toast notifications                    **************
 *************               Lesson 54: Handling validation errors                    **************
 *************               Lesson 55: Creating a server error component                    **************

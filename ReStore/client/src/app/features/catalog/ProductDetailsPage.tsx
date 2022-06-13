@@ -13,8 +13,8 @@ const ProductDetailsPage = () => {
         const fetchProduct = async () => {
             try {
                 setProduct(await agent.Catalog.details(id ? parseInt(id) : 0));
-            } catch(e){
-                console.log(e);
+            } catch(e: any){
+                console.log(e.response);
             }
             setLoading(false);
         }

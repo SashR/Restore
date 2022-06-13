@@ -25,7 +25,9 @@ namespace API.Controllers
         [HttpGet("{id}")]       // Pass parameter -- api/products/3
         public async Task<ActionResult<Product>> GetProduct(int id)
         {
-            return await _context.Products.FindAsync(id);
+            var product = await _context.Products.FindAsync(id);
+            if (product ==  null) return NotFound();    // throw not found error
+            return product;
         }
 
     }
