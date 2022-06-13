@@ -1,7 +1,7 @@
 import { Divider, Grid, Table, TableBody, TableCell, TableContainer, TableRow, Typography } from "@mui/material";
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import agent from "../../api/agent";
 import { Product } from "../../models/product";
 
 const ProductDetailsPage = () => {
@@ -12,8 +12,7 @@ const ProductDetailsPage = () => {
     useEffect(()=>{
         const fetchProduct = async () => {
             try {
-                const resp = await axios.get(`http://localhost:5000/api/products/${id}`);
-                setProduct(resp.data);
+                setProduct(await agent.Catalog.details(id ? parseInt(id) : 0));
             } catch(e){
                 console.log(e);
             }

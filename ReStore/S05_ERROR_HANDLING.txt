@@ -72,11 +72,22 @@ public ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddleware> lo
 -- The file will provide and intermediate interface with axios to allow for easy connections,
     while also making the capabilities much more scalable.
 5:37
+-- Idea is to create a function to map responses,
+-- Then create an object to map http verbs for crud commands while also using the above function
+-- Finally, for each feature, create an object mapping all request leveraging the endpoint maps
+-- export this and then replace all axios uses
 
+Changes made to this file, agent.ts, Catalog.tsx and ProductDetailsPage.tsx
 
-*************               Lesson 47: Introduction                    **************
-*************               Lesson 47: Introduction                    **************
-*************               Lesson 47: Introduction                    **************
+*************               Lesson 51: React component for error testing                    **************
+*************               Lesson 52: Using axios intercepters                    **************
+*************               Lesson 53: Adding toast notifications                    **************
+*************               Lesson 54: Handling validation errors                    **************
+*************               Lesson 55: Creating a server error component                    **************
+*************               Lesson 56: Creating a not found component                    **************
+*************               Lesson 57: Adding a delay & loading indicators -- client                    **************
+*************               Lesson 58: Using the dotnet debugging tool                    **************
+*************               Lesson 59: Using the react debugger                    **************
 
 
 
