@@ -14,7 +14,7 @@ const ProductDetailsPage = () => {
             try {
                 setProduct(await agent.Catalog.details(id ? parseInt(id) : 0));
             } catch(e: any){
-                console.log(e.response);
+                console.log(e);
             }
             setLoading(false);
         }

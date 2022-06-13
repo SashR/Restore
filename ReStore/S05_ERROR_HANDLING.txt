@@ -87,8 +87,13 @@ Changes made to this file, agent.ts, Catalog.tsx and ProductDetailsPage.tsx
 
 Changes made to this file, AboutPage.tsx, ProductsController, ProductDetailsPage
 
-*************               Lesson 52: Using axios intercepters                    **************
 
+*************               Lesson 52: Using axios intercepters                    **************
+-- We will use axios intercepts to act on the error responses from the api
+-- Done in agent.ts file
+-- We can do something with the error inside the interceptor, but we need to catch the error in our
+    component or axios file
+--
 
 
 *************               Lesson 53: Adding toast notifications                    **************

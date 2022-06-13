@@ -1,6 +1,16 @@
-import axios, { AxiosResponse } from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
 
 axios.defaults.baseURL = 'http://localhost:5000/api/';
+
+
+// Axios intercepters
+axios.interceptors.response.use(resp => {
+    return resp
+}, (error: AxiosError) => {
+    console.log("Caught by intercepter");
+    return Promise.reject(error.response); // needs to be done
+});
+
 
 // Helper method for fetch data from response
 const responseBody = (response: AxiosResponse) => response.data;
