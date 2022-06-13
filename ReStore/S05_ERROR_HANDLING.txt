@@ -93,10 +93,19 @@ Changes made to this file, AboutPage.tsx, ProductsController, ProductDetailsPage
 -- Done in agent.ts file
 -- We can do something with the error inside the interceptor, but we need to catch the error in our
     component or axios file
---
+<ToastContainer position="bottom-right" hideProgressBar theme="colored" />
+import 'react-toastify/dist/ReactToastify.css'; // CSS for toasts
+-- We can now use this in our interceptor
+-- We can override type safety by adding ! to the end of the expression
 
 
 *************               Lesson 53: Adding toast notifications                    **************
+-- Need to add a toast library to do this
+npm i react-toastify
+-- Need to add toastContainer just inside our themeProvider, to be able to use it
+-- Use axios intercepter in agent.ts file to automatically toast the errors
+
+
 *************               Lesson 54: Handling validation errors                    **************
 *************               Lesson 55: Creating a server error component                    **************
 *************               Lesson 56: Creating a not found component                    **************

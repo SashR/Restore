@@ -8,6 +8,8 @@ import HomePage from "../features/home/HomePage";
 import ContactPage from "../features/contact/ContactPage";
 import AboutPage from "../features/about/AboutPage";
 import ProductDetailsPage from "../features/catalog/ProductDetailsPage";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css'; // CSS for toasts
 
 const darkTheme = createTheme({
   palette: {
@@ -52,6 +54,7 @@ function App() {
 
   return (
     <ThemeProvider theme={theme ? darkTheme : customTheme}>
+      <ToastContainer position="bottom-right" hideProgressBar theme="colored" />
       <CssBaseline />
       <Header theme={theme} setTheme={onChangeTheme} />
       <Container>
