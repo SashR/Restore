@@ -107,6 +107,18 @@ npm i react-toastify
 
 
 *************               Lesson 54: Handling validation errors                    **************
+-- In our error response, the individuals validation errors are can be found inside an errors array inside the 
+    data object
+-- It would be more convenient to convert the array of objects into a flat array
+-- Also, validation errors are a 400 error, so we need to check inside this block if the errors object is present
+-- Use // @ts-ignore above any TS line you want type checking to be disabled for
+-- We use a material ui alert to show this
+
+
+-- Changes made to agent.ts, AboutPage, App.tsx
+
+
+
 *************               Lesson 55: Creating a server error component                    **************
 *************               Lesson 56: Creating a not found component                    **************
 *************               Lesson 57: Adding a delay & loading indicators -- client                    **************

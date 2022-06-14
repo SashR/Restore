@@ -54,7 +54,7 @@ function App() {
 
   return (
     <ThemeProvider theme={theme ? darkTheme : customTheme}>
-      <ToastContainer position="bottom-right" hideProgressBar theme="colored" />
+      <ToastContainer position="top-right" theme="colored" />
       <CssBaseline />
       <Header theme={theme} setTheme={onChangeTheme} />
       <Container>

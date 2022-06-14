@@ -7,22 +7,30 @@ interface ResponseData {
     data: {
         title: string;
         status: number;
+        errors?: Object;
     };
     status: number;
 }
 
 // Axios intercepters
-axios.interceptors.response.use(resp => {
-    return resp
-}, (error: AxiosError) => {
+axios.interceptors.response.use(async (resp) => {
+    return await resp
+}, async (error: AxiosError) => {
     console.log("Caught by intercepter");
-    const {data, status} = error.response as ResponseData; 
-    // const data = error.response?.data; 
+    const {data, status} = await error.response as ResponseData; 
     switch (status) {
         case 401:
             toast.error(data.title);
             break;
         case 400:
+            if(!!data.errors){
+                const modelStateErrors: string[] = [];
+                for(const key in data.errors){
+                    // @ts-ignore
+                    if(data.errors[key]) modelStateErrors.push(data.errors[key]);
+                }
+                throw modelStateErrors.flat();
+            }
             toast.error(data.title);
             break;
         case 404:
