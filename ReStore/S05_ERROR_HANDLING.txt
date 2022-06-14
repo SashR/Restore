@@ -120,6 +120,26 @@ npm i react-toastify
 
 
 *************               Lesson 55: Creating a server error component                    **************
+-- 500 error gets generated in the API
+-- The Contents of the error will be displayed insided the client browser
+-- Create a ServerError.tsx under app/errors/
+-- Add some basic markup
+-- We want to redirect the user on a 500 error occuring. Currently, we can detect 500 errors in our interceptor 
+    code inside the agent.ts file
+-- The agent.ts is not a react component
+-- The AboutPage has access to the history object, which has a method called push that allows pushing a location onto the stack 
+-- The agent.ts file is not part of the Route components and has no default access to the history object
+
+-- We will need to change the router provider from BrowserRouter to HistortRouter, as it always to pass the history object, and 
+    export it allowing us to import it inside agent.ts.
+-- Once done we can go to our agent.ts file and import it, we can now push to /server-error
+-- Finally we should add a route for this in App.tsx
+-- Now we can pass data to history push method, and use this data via useLocation in our component. We can now render it.
+-- Remember that the top of the error stack trace is often the most helpful.
+
+Changes made to this file, Index.tsx, \app\errors\ServerError.tsx; agent.ts, App.tsx, AboutPage
+
+
 *************               Lesson 56: Creating a not found component                    **************
 *************               Lesson 57: Adding a delay & loading indicators -- client                    **************
 *************               Lesson 58: Using the dotnet debugging tool                    **************

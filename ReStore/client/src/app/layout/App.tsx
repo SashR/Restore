@@ -10,6 +10,7 @@ import AboutPage from "../features/about/AboutPage";
 import ProductDetailsPage from "../features/catalog/ProductDetailsPage";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css'; // CSS for toasts
+import ServerError from "../errors/ServerError";
 
 const darkTheme = createTheme({
   palette: {
@@ -64,6 +65,7 @@ function App() {
           <Route path="/catalog/:id" element={<ProductDetailsPage />} />
           <Route path='/contacts' element={<ContactPage />} />
           <Route path='/about' element={<AboutPage />} />
+          <Route path='/server-error' element={<ServerError />} />
         </Routes>
       </Container>
     </ThemeProvider>
