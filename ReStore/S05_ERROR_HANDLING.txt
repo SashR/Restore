@@ -158,6 +158,17 @@ Changes made to this file, NotFound.tsx; ProductDetailsPage; App.tsx
 Changes made to agent.ts; this file; LoadingComponent, Catalog, ProductDetailsPage
 
 *************               Lesson 58: Using the dotnet debugging tool                    **************
+-- We have a debugger provided, allows us to see effect of code
+-- Click on reddot next to code
+-- You need .vscode\launch.json file 
+-- click on run (sidebar below git) and debug option
+-- Use attach mode and attach to api.exe
+-- don't add breakpoint to program.cs (can use launch option to launch process and attach to it)
+
+Changes made to this file, 
+
+
+
 *************               Lesson 59: Using the react debugger                    **************
 
 
