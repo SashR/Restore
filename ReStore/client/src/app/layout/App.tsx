@@ -11,6 +11,7 @@ import ProductDetailsPage from "../features/catalog/ProductDetailsPage";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css'; // CSS for toasts
 import ServerError from "../errors/ServerError";
+import NotFound from "../errors/NotFound";
 
 const darkTheme = createTheme({
   palette: {
@@ -66,6 +67,7 @@ function App() {
           <Route path='/contacts' element={<ContactPage />} />
           <Route path='/about' element={<AboutPage />} />
           <Route path='/server-error' element={<ServerError />} />
+          <Route path='/*' element={<NotFound />} />
         </Routes>
       </Container>
     </ThemeProvider>

@@ -141,6 +141,12 @@ Changes made to this file, Index.tsx, \app\errors\ServerError.tsx; agent.ts, App
 
 
 *************               Lesson 56: Creating a not found component                    **************
+-- Create component NotFound with some basic markup;
+-- Add to route in App.tsx; at the bottom with path /*, hence making it the default for non matching paths
+-- Show component on ProductDetailsPage if not found
+
+Changes made to this file, NotFound.tsx; ProductDetailsPage; App.tsx
+
 *************               Lesson 57: Adding a delay & loading indicators -- client                    **************
 *************               Lesson 58: Using the dotnet debugging tool                    **************
 *************               Lesson 59: Using the react debugger                    **************
