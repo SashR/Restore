@@ -4,10 +4,12 @@ import ProductList from "./ProductList";
 import { useState, useEffect } from "react";
 import { Typography } from "@mui/material";
 import agent from "../../api/agent";
+import LoadingComponent from "../../layout/LoadingComponent";
 
 const Catalog = () => {
     const [products, setProducts] = useState<Product[]>([]);
-    
+    const [loading, setLoading] = useState<Boolean>(true);
+
     // fetch data from api
     const fetchProducts = async () => {
     try {
@@ -15,12 +17,15 @@ const Catalog = () => {
     } catch(e){
       console.log(e);
     }
+    setLoading(false);
   };
 
   // Call for data from server, no dependencies
     useEffect(()=>{
         fetchProducts();
     }, [])
+
+    if (loading) return <LoadingComponent message="Loading products ..." />;
 
     return (
         <>

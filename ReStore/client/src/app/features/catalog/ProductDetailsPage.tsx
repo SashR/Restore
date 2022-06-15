@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import agent from "../../api/agent";
 import NotFound from "../../errors/NotFound";
+import LoadingComponent from "../../layout/LoadingComponent";
 import { Product } from "../../models/product";
 
 const ProductDetailsPage = () => {
@@ -22,7 +23,7 @@ const ProductDetailsPage = () => {
         fetchProduct();
     },[id])
 
-    if(loading) return <Typography sx={{marginTop:10}} variant="h2"> Loading ... </Typography>;
+    if(loading) return <LoadingComponent message="Loading product ..." />;
 
     if(!product) return <NotFound />;
 

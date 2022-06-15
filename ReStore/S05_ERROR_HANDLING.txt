@@ -148,6 +148,15 @@ Changes made to this file, Index.tsx, \app\errors\ServerError.tsx; agent.ts, App
 Changes made to this file, NotFound.tsx; ProductDetailsPage; App.tsx
 
 *************               Lesson 57: Adding a delay & loading indicators -- client                    **************
+-- We will simulate a delay inside our interceptor, using promises and setTimeout
+-- Create a new file called LoadingComponent inside /layout/
+-- Check progress indicators in MUI, as well as backdrop
+-- Now add LoadingComponent to Catalog and ProductDetailsPage
+
+3:42
+
+Changes made to agent.ts; this file; LoadingComponent, Catalog, ProductDetailsPage
+
 *************               Lesson 58: Using the dotnet debugging tool                    **************
 *************               Lesson 59: Using the react debugger                    **************
 

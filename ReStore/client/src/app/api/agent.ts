@@ -13,9 +13,11 @@ interface ResponseData {
     status: number;
 }
 
+const sleep = () => new Promise(resolve => setTimeout(resolve,1000));
 // Axios intercepters
 axios.interceptors.response.use(async (resp) => {
-    return await resp
+    await sleep();
+    return await resp;
 }, async (error: AxiosError) => {
     console.log("Caught by intercepter");
     const {data, status} = await error.response as ResponseData; 
