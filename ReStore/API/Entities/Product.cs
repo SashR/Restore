@@ -15,5 +15,20 @@ namespace API
         public string Type { get; set; }
         public string Brand { get; set; }
         public int QuantityInStock { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            return base.Equals(obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return base.ToString();
+        }
     }
 }

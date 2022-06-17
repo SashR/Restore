@@ -19,6 +19,13 @@
 
 
 *************               Lesson 62: Creating the basket entity                **************
+-- We are choosing the Database option. Hence we need some tables, and APIs to interact with it.
+-- Create new C# class for entity under entities
+-- Add properties and helper methods (Add/remove sub entities)
+-- Register entity in StoreContext.cs class
+
+
+
 *************               Lesson 6                **************
 *************               Lesson 6                **************
 *************               Lesson 6                **************
