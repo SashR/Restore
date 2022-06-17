@@ -1,0 +1,29 @@
+*************               Lesson 61: Introduction                **************
+-- We will be working on both API and Client
+-- We will look at storage of the basket (client vs db)
+-- Relationships in EF 
+-- Shaping data being returned from the API (SELECT statement)
+-- Applying React context
+-- App Initialization
+
+-- Local storage on browser is not a great option as the server is completely unaware, hence preventing
+    many analytics opportunities.
+-- Cookies are also an option, they are also persistent on the client, but they get sent as part of every
+    request.
+-- Final option is storing in the database, but here we need to update both client and server
+-- We will not be tracking the individual basket changes
+
+-- Relationships: Each (One) Basket can have (Many) Items; Each Item is a Product (One to One)
+-- React Context allows avoiding extreme prop drilling. providing data easily across the depth of a tree.
+-- Allows for centralizing some of our state
+
+
+*************               Lesson 62: Creating the basket entity                **************
+*************               Lesson 6                **************
+*************               Lesson 6                **************
+*************               Lesson 6                **************
+*************               Lesson 6                **************
+*************               Lesson 6                **************
+*************               Lesson 6                **************
+*************               Lesson 6                **************
+*************               Lesson 6                **************
