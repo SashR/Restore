@@ -169,8 +169,21 @@ Changes made to this file,
 
 
 
-*************               Lesson 59: Using the react debugger                    **************
+*************               Lesson 59+60: Using the react debugger and Summary                 **************
+-- Not that useful. Quicker to just use console.log() statements to view variable values
+-- Just type debugger; to your react component, this use Chrome devtools instead of vscode to set a breakpoint
+-- You can step into, step out, etc
+-- Can be shit as you may find yourself stepping through library code
+-- React now also provides a debugger, but it requires config, and is not that great.
+-- A common error is incorrect data being sent to the html template to be rendered, hence it is better
+    to inspect the data just before it reaches the templating
+-- React DevTools are much more useful than the debugger
 
+-- We have a means to simulate common errors that might occur. We have also added scalable means to catching
+    and handling all of these common errors, providing valuable feedbacm to the user.
+-- We have also briefly went through various debugging methods
+
+Changes made to this file
 
 
 
