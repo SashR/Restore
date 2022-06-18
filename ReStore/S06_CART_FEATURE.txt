@@ -73,10 +73,45 @@ public Basket Basket {get; set; }
 -- initialize context
 -- We need 3 endpoints, one for fetching the basket, adding to/ removing from it
 -- We will use cookies to identify the basket
--- 
+[HttpGet]
+public async Task<ActionResult<Basket>> GetBasket()
+{
+    var basket = await _context.Baskets             // Fetch basket
+        .Include(i => i.Items)                      // Include the items in the basket
+        .ThenInclude(p => p.Product)                // map the items to products
+        .FirstOrDefaultAsync(x => x.BuyerId == Request.Cookies["buyerId"]); // use cookie to find it
+
+    if(basket == null) return NotFound();
+    return basket;
+}
 
 
-*************               Lesson 6                **************
+*************               Lesson 65: Add item to basket               **************
+-- We need to first fetch the basket, so we can reuse the same function a before, so we extract the method
+// Endpoint for adding an item to a basket
+[HttpPost] // values will be fetch from query string: api/basket?productId=32&quntity=2
+public async Task<ActionResult> AddItemToBasket(int productId, int quantity)
+{
+    // Find basket if it exists
+    var basket = await RetrieveBasket(); // return basket or null (default for any object)
+    // Create basket if it doesn't
+    if (basket == null) basket = CreateBasket();
+
+    // FInd product using productId
+    var product = await _context.Products.FindAsync(productId);
+    if (product == null) return NotFound();          // Product does not match, just in case
+
+    // Add item with quantity
+    basket.AddItem(product, quantity);
+    // Save changes
+    var result = await _context.SaveChangesAsync() > 0; // detect if changes occured, commits them
+
+    if (result) return StatusCode(201);
+
+    return BadRequest(new ProblemDetails{Title = "Problem saving item to basket"});
+}
+
+
 *************               Lesson 6                **************
 *************               Lesson 6                **************
 *************               Lesson 6                **************
