@@ -26,7 +26,47 @@
 
 
 
-*************               Lesson 6                **************
+*************               Lesson 63: EF Relationships                **************
+-- We did not add a seperated DBSet for Basket Items, because we will never query them directly,
+    only via their relationship with the Basket.
+-- We need to create our migration, stop the API SERVER and execute the following command:
+dotnet ef migrations add BasketEntityAdded
+-- We can now find new files in our Migrations folder. We can change table names via data annotations later.
+-- The migration generated might not match what we want
+-- Check the ondelete behavior of the foreign contraints; Cascade or Restrict
+-- Restrict will cause child entities to persist even if the parent is deleted.
+-- This is not good for relationships where one entity is entirely dependent on the other existing.
+-- Some fields may be nullable when they shouldn't be.
+-- We should run the below command to remove this shit migration:
+dotnet ef migrations remove 
+
+-- Checkup fully defined relationships in the MS docs.
+public class Blog
+{
+    public int BlogId { get; set; }
+    public string Url { get; set; }
+
+    public List<Post> Posts { get; set; }
+}
+
+public class Post
+{
+    public int PostId { get; set; }
+    public string Title { get; set; }
+    public string Content { get; set; }
+
+    public int BlogId { get; set; }             // ********
+    public Blog Blog { get; set; }
+}
+-- The child needs a fully definition i.e. identify foreign key in Parent table
+// Fully definitions
+public int BasketId {get; set;}
+public Basket Basket {get; set; }
+-- We can then use data annotations to rename the table
+[Table("BasketItems")]
+-- We can run our migrations command again, check the migration to make sure all is well
+-- We can now restart our server to apply the migration
+
 *************               Lesson 6                **************
 *************               Lesson 6                **************
 *************               Lesson 6                **************
