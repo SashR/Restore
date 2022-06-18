@@ -112,7 +112,15 @@ public async Task<ActionResult> AddItemToBasket(int productId, int quantity)
 }
 
 
-*************               Lesson 6                **************
+*************               Lesson 66: Using the debugger to check our add item code         **************
+-- Add a breakpoint to the start of the application
+-- Run debugger, attach to api.exe
+-- Test get, should be 404 as no cookie present
+-- need to add below to launch.json
+"requireExactSource": false
+--Enrirt framework can only get id for the basket if it has been saved into the db.
+-- There is a problem, our fetch basket is generating an Internal Server Error
+
 *************               Lesson 6                **************
 *************               Lesson 6                **************
 *************               Lesson 6                **************
