@@ -121,7 +121,34 @@ public async Task<ActionResult> AddItemToBasket(int productId, int quantity)
 --Enrirt framework can only get id for the basket if it has been saved into the db.
 -- There is a problem, our fetch basket is generating an Internal Server Error
 
-*************               Lesson 6                **************
-*************               Lesson 6                **************
+
+
+*************               Lesson 67: Shaping the data to be return                **************
+-- There is circular referencing occuring;
+-- This is because our basket points to a basketItem; which points back to the basket;
+    which points to the basketItem, and so on and so forth.
+-- Create a new folder DTOS; BasketDTO.cs
+-- Data Transfer Object help map our entities allowing easy standardization.
+-- We will return this instead of an instance of our entity
+-- This is basically just creating a mapping
+return new BasketDto{
+    Id = basket.Id,
+    BuyerId = basket.BuyerId,
+    Items = basket.Items.Select(item => new BasktItemDto
+    {
+        ProductId = item.ProductId,
+        Name = item.Product.Name,
+        Price = item.Product.Price,
+        PictureUrl = item.Product.PictureUrl,
+        Type = item.Product.Type,
+        Brand = item.Product.Brand,
+        Quantity = item.Quantity
+    }).ToList()
+-- Fairly straigtforward stuff
+
+*************               Lesson 68: Removing an item from the basket                **************
+
+
+
 *************               Lesson 6                **************
 *************               Lesson 6                **************
