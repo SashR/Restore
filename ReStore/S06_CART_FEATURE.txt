@@ -147,7 +147,7 @@ return new BasketDto{
 -- Fairly straigtforward stuff
 
 *************               Lesson 68: Removing an item from the basket                **************
-
+-- Fairly straightforward; very similar to previous one
 
 
 *************               Lesson 6                **************
