@@ -67,7 +67,15 @@ public Basket Basket {get; set; }
 -- We can run our migrations command again, check the migration to make sure all is well
 -- We can now restart our server to apply the migration
 
-*************               Lesson 6                **************
+
+*************               Lesson 64: Basket Controller                **************
+-- API functionality for interacting with the basket
+-- initialize context
+-- We need 3 endpoints, one for fetching the basket, adding to/ removing from it
+-- We will use cookies to identify the basket
+-- 
+
+
 *************               Lesson 6                **************
 *************               Lesson 6                **************
 *************               Lesson 6                **************
