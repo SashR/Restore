@@ -150,5 +150,13 @@ return new BasketDto{
 -- Fairly straightforward; very similar to previous one
 
 
-*************               Lesson 6                **************
+*************               Lesson 69: Proper 201 created response               **************
+-- We need to return data on the created resource, standard practices
+-- Pretty straight forward, just need  to name our fetch method, then use CreatedAtRoute 
+if (result) return CreatedAtRoute("GetBasket", BasketMapDto(basket));
+
+-- Need to add some config to map CORS more (Startup.cs)
+-- need to add AllowCredentials(), allowing us to pass cookies across different domains
+
+
 *************               Lesson 6                **************

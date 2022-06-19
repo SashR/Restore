@@ -21,31 +21,18 @@ namespace API.Controllers
         }
 
         // Endpoint for fetching a basket
-        [HttpGet]
+        [HttpGet(Name = "GetBasket")]
         public async Task<ActionResult<BasketDto>> GetBasket()
         {
             var basket = await RetrieveBasket();
 
             if (basket == null) return NotFound();
-            return new BasketDto{
-                Id = basket.Id,
-                BuyerId = basket.BuyerId,
-                Items = basket.Items.Select(item => new BasktItemDto
-                {
-                    ProductId = item.ProductId,
-                    Name = item.Product.Name,
-                    Price = item.Product.Price,
-                    PictureUrl = item.Product.PictureUrl,
-                    Type = item.Product.Type,
-                    Brand = item.Product.Brand,
-                    Quantity = item.Quantity
-                }).ToList()
-            };
+            return BasketMapDto(basket);
         }
 
         // Endpoint for adding an item to a basket
         [HttpPost] // values will be fetch from query string: api/basket?productId=32&quntity=2
-        public async Task<ActionResult> AddItemToBasket(int productId, int quantity)
+        public async Task<ActionResult<BasketDto>> AddItemToBasket(int productId, int quantity)
         {
             // Find basket if it exists
             var basket = await RetrieveBasket(); // return basket or null (default for any object)
@@ -61,7 +48,7 @@ namespace API.Controllers
             // Save changes
             var result = await _context.SaveChangesAsync() > 0; // detect if changes occured, commits them
 
-            if (result) return StatusCode(201);
+            if (result) return CreatedAtRoute("GetBasket", BasketMapDto(basket));
 
             return BadRequest(new ProblemDetails{Title = "Problem saving item to basket"});
         }
@@ -109,6 +96,26 @@ namespace API.Controllers
             var basket = new Basket{BuyerId = buyerId};     // create basket
             _context.Baskets.Add(basket);                   // Add basket to let EF track it
             return basket;
+        }
+
+        // Method for mapping baket to basket dto
+        private BasketDto BasketMapDto(Basket basket)
+        {
+            return new BasketDto
+            {
+                Id = basket.Id,
+                BuyerId = basket.BuyerId,
+                Items = basket.Items.Select(item => new BasktItemDto
+                {
+                    ProductId = item.ProductId,
+                    Name = item.Product.Name,
+                    Price = item.Product.Price,
+                    PictureUrl = item.Product.PictureUrl,
+                    Type = item.Product.Type,
+                    Brand = item.Product.Brand,
+                    Quantity = item.Quantity
+                }).ToList()
+            };
         }
 
     }
