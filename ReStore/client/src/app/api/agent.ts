@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 import { history } from "../..";
 
 axios.defaults.baseURL = 'http://localhost:5000/api/';
+axios.defaults.withCredentials = true;
 
 interface ResponseData {
     data: {
@@ -66,6 +67,13 @@ const Catalog = {
     details: (id: number) => requests.get(`products/${id}`),
 }
 
+// Basket methods
+const Basket = {
+    get:       () => requests.get('basket'),
+    addItem:   (pId: number, qty = 1) => requests.post(`basket?productId=${pId}&quantity=${qty}`, {}),
+    removeItem:(pId: number, qty = 1) => requests.delete(`basket?productId=${pId}&quantity=${qty}`),
+}
+
 // errors mappings
 const TestErrors = {
     get400Errors: () => requests.get('buggy/bad-request'),
@@ -76,6 +84,6 @@ const TestErrors = {
 }
 
 
-const agent = { Catalog, TestErrors }; // wrapper for the catalog
+const agent = { Catalog, TestErrors, Basket }; // wrapper for the catalog
 
 export default agent;
