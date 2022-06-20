@@ -11,7 +11,7 @@ interface Props {
 }
 
 const ProductCard = ({product}: Props) => {
-    const [loading, setLoading] = useState<Boolean>(false);
+    const [loading, setLoading] = useState<boolean>(false);
 
     const addItemHandler = async (pId: any) => {
         setLoading(true);
@@ -43,7 +43,7 @@ const ProductCard = ({product}: Props) => {
                 </Typography>
             </CardContent>
             <CardActions>
-                <LoadingButton size="small" onClick={()=>addItemHandler(product.id)} >Add to Card</LoadingButton>
+                <LoadingButton loading={loading} size="small" onClick={()=>addItemHandler(product.id)} >Add to Card</LoadingButton>
                 <Button component={Link} to={`/catalog/${product.id}`} size="small">View</Button>
             </CardActions>
         </Card>

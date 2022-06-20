@@ -159,4 +159,50 @@ if (result) return CreatedAtRoute("GetBasket", BasketMapDto(basket));
 -- need to add AllowCredentials(), allowing us to pass cookies across different domains
 
 
-*************               Lesson 6                **************
+*************               Lesson 70: axios methods for the basket                **************
+-- Very simple, we just need to extend the agent.ts function with some methods linking to the Basket endpoints:
+// Basket methods
+const Basket = {
+    get:       () => requests.get('basket'),
+    addItem:   (pId: number, qty = 1) => requests.post(`basket?productId=${pId}&quantity=${qty}`, {}),
+    removeItem:(pId: number, qty = 1) => requests.delete(`basket?productId=${pId}&quantity=${qty}`),
+}
+-- We can now use this functions in our product card to add an item to the basket
+-- We will need a LoadingButton from material ui, need to install
+npm i @mui/lab
+                <LoadingButton size="small" onClick={()=>addItemHandler(product.id)} >Add to Card</LoadingButton>
+-- For testing, remove the cookie (not port aware)
+-- We also need to add cookies enabling in our agent.ts file
+axios.defaults.withCredentials = true;
+-- Allows browser to receive and set cookies
+-- When testing two request get sent, but the first is a preflight request and is used to test api
+-- We should get a 201 created response, with our data (basket, buyerId, etc)
+
+Changes made to this file, agent.ts; ProductCard.tsx
+
+*************               Lesson 71: Creating a basket component                **************
+-- We will need an interface and a component for the basket
+-- To help in making the interface; we can use the JSON object from SWAGGER
+-- USE json2ts for finding interface == \models\basket.ts
+-- Then create a component at \features\basketpage\BasketPage.tsx
+-- Need to retrieve basket from API
+
+-- Need to configure links; header.tsx and app.tsx
+
+Changes made to this file; \models\basket.ts; \features\basket\BasketPage.tsx; header.tsx and app.tsx
+
+*************               Lesson 72: Styling basket page with the mui table                **************
+
+
+Changes made to this file; BasketPage.tsx;
+
+*************               Lesson 72.5: Bugfix                **************
+-- Adding item initially generates quantity of zero
+-- need to change add item functionality in basket.cs
+
+Changes made to this file;
+
+
+*************               Lesson 7                **************
+*************               Lesson 7                **************
+*************               Lesson 7                **************
