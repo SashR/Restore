@@ -46,7 +46,7 @@ const Header = (props: Props) => {
                         ))}
                     </List>
                     <Box sx={{display:"flex"}}>
-                        <IconButton size="large" sx={{color:"inherit"}} >
+                        <IconButton size="large" sx={{color:"inherit"}} component={NavLink} to="/basket" >
                             <Badge badgeContent={4} color="secondary">
                                 <ShoppingCartCheckout />
                             </Badge>
