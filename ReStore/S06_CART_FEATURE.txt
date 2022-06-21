@@ -214,7 +214,15 @@ Changes made to this file;
 
 Changes made to this file; app\context\StoreContext.tsx; Index.tsx
 
+
 *************               Lesson 74: App initialization -- fetch basket                   **************
+-- Attempted without tutorial
+-- Startup is done in App.tsx; useEffect can be used to run sideffects on components;
+-- Need to access cookie
+-- Note if using a function inside context, extract it using destructuring; can allow easy dependencies.
+
+Changes made to this file; app/util/utils.ts; Index.ts
+
 *************               Lesson 75: Updating header with basket item count                **************
 *************               Lesson 7                **************
 *************               Lesson 7                **************
