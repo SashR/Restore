@@ -203,6 +203,19 @@ Changes made to this file; BasketPage.tsx;
 Changes made to this file;
 
 
+*************               Lesson 73: Centralizing state with React context                **************
+-- React context allows creating an almost local database; allowing us to store state and allow any descendent component
+    to use this state
+-- We need to use createContext() from react; and add an interface to it to match what we plan on storing and the actions
+    we plan on implementing (basket, setbasket, removeItem)
+-- We then create a custom hook to use the StoreContext easier
+-- We then also create a custom provider implementing the StoreProvider; allowing easy usage
+-- We can then apply our provider wherever we want (highest level)
+
+Changes made to this file; app\context\StoreContext.tsx; Index.tsx
+
+*************               Lesson 74: App initialization -- fetch basket                   **************
+*************               Lesson 75: Updating header with basket item count                **************
 *************               Lesson 7                **************
 *************               Lesson 7                **************
 *************               Lesson 7                **************
