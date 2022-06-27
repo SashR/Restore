@@ -250,6 +250,18 @@ if(loading) return <LoadingComponent message="Removing item" />;
 
 Changes made to this file; BasketPage.tsx
 
-*************               Lesson 77: Adding specific loading indicators for buttons                **************
+*************               Lesson 77.1: Adding specific loading indicators for buttons                **************
+-- Attempted
+-- Implement logic for disabling all other buttons, and specific loading logic
+
+changes made to this file; BasketPage.tsx
+
+
+*************               Lesson 77.2: Adding specific loading indicators for buttons                **************
+-- Attempted
+
+changes made to this file; BasketPage.tsx
+
+
 *************               Lesson 78: Basket summary challenge                **************
 *************               Lesson 79: Basket summary solution                **************
