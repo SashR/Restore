@@ -1,6 +1,7 @@
 import { ShoppingCartCheckout } from "@mui/icons-material";
 import { AppBar, Badge, Box, FormControlLabel, FormGroup, IconButton, List, ListItemButton, Switch, Toolbar, Typography } from "@mui/material";
 import { NavLink } from "react-router-dom";
+import { useStoreContext } from "../context/StoreContext";
 
 interface Props {
     theme: Boolean,
@@ -18,6 +19,9 @@ const rightLinks = [
 ];
 
 const Header = (props: Props) => {
+    const { basket } = useStoreContext();
+    const itemsCount = basket?.items.reduce((sum, it) => sum + it.quantity, 0);
+
     const {theme, setTheme} = props; 
     const textStyle = {
         textDecoration: "none",
@@ -28,6 +32,7 @@ const Header = (props: Props) => {
         '&.active':{color:"#ffcc00"},
         typography: "h6"
     }
+
     return (
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position='fixed' sx={{mb:4}}>
@@ -47,7 +52,7 @@ const Header = (props: Props) => {
                     </List>
                     <Box sx={{display:"flex"}}>
                         <IconButton size="large" sx={{color:"inherit"}} component={NavLink} to="/basket" >
-                            <Badge badgeContent={4} color="secondary">
+                            <Badge badgeContent={itemsCount} color="secondary">
                                 <ShoppingCartCheckout />
                             </Badge>
                         </IconButton>

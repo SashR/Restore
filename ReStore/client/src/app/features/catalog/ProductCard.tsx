@@ -4,6 +4,7 @@ import { Avatar, Button, Card, CardActions, CardContent, CardHeader, CardMedia, 
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import agent from "../../api/agent";
+import { useStoreContext } from "../../context/StoreContext";
 import { Product } from "../../models/product";
 
 interface Props {
@@ -12,11 +13,12 @@ interface Props {
 
 const ProductCard = ({product}: Props) => {
     const [loading, setLoading] = useState<boolean>(false);
+    const {setBasket} = useStoreContext();
 
     const addItemHandler = async (pId: any) => {
         setLoading(true);
         try {
-            await agent.Basket.addItem(pId);
+            setBasket(await agent.Basket.addItem(pId));
         }catch(e: any){
             console.log(e);
         }

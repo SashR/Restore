@@ -224,6 +224,18 @@ Changes made to this file; app\context\StoreContext.tsx; Index.tsx
 Changes made to this file; app/util/utils.ts; Index.ts
 
 *************               Lesson 75: Updating header with basket item count                **************
-*************               Lesson 7                **************
-*************               Lesson 7                **************
-*************               Lesson 7                **************
+-- Attemped without tutorial
+-- can replace fetch code with context in BasketPage.tsx
+-- Need to also update Product card to hook up the add item to the context
+-- Very simple, in our Header we read from Basket; in our Card (add function), we use setBasket to update it
+
+Changes made to this file; Header.tsx, BasketPage.tsx; ProductCard
+
+*************               Lesson 76: Adding the remove item functionality                **************
+-- Attempted without tutorial
+
+Changes made to this file
+
+*************               Lesson 77: Adding specific loading indicators for buttons                **************
+*************               Lesson 78: Basket summary challenge                **************
+*************               Lesson 79: Basket summary solution                **************
