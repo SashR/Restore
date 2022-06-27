@@ -233,8 +233,22 @@ Changes made to this file; Header.tsx, BasketPage.tsx; ProductCard
 
 *************               Lesson 76: Adding the remove item functionality                **************
 -- Attempted without tutorial
+const { basket, removeItem } = useStoreContext();
+const [loading, setLoading] = useState<boolean>(false);
 
-Changes made to this file
+const removeItemHandler = async (pId: number) => {
+    setLoading(true);
+    try{
+        await agent.Basket.removeItem(pId);
+        removeItem(pId, 1);
+    }catch(e: any){
+        console.log(e);
+    }
+    setLoading(false);
+}
+if(loading) return <LoadingComponent message="Removing item" />;
+
+Changes made to this file; BasketPage.tsx
 
 *************               Lesson 77: Adding specific loading indicators for buttons                **************
 *************               Lesson 78: Basket summary challenge                **************
