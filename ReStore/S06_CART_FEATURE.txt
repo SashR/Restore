@@ -265,3 +265,12 @@ changes made to this file; BasketPage.tsx
 
 *************               Lesson 78: Basket summary challenge                **************
 *************               Lesson 79: Basket summary solution                **************
+-- Very easy
+-- No need for useState or useEffect; component will always re-render if basket changes. I.e. need to extract basket from context
+    since the functions change often.
+
+Changes made to this file; BasketSummary.tsx; BasketPage.tsx; utils.ts
+
+
+*************               Lesson 80-81: Product details add items to cart                **************
+*************               Lesson 82: Adding a checkout page                **************

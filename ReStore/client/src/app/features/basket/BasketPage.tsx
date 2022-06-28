@@ -5,6 +5,8 @@ import { Box } from "@mui/system";
 import { useState } from "react";
 import agent from "../../api/agent";
 import { useStoreContext } from "../../context/StoreContext";
+import { formatMoney } from "../../util/util";
+import BasketSummary from "./BasketSummary";
 
 interface LoadingDetails {
     id : number;
@@ -81,7 +83,7 @@ const BasketPage = () => {
                                 </LoadingButton>
                             </TableCell>
                             <TableCell align="right"> {item.quantity} </TableCell>
-                            <TableCell align="right"> {(item.price * item.quantity/100).toFixed(2)} </TableCell>
+                            <TableCell align="right"> {formatMoney(item.price * item.quantity)} </TableCell>
                             <TableCell align="right">
                                 <LoadingButton 
                                     loading={loading?.value && loading.id === item.productId && loading.type === "remall"} 
@@ -96,7 +98,8 @@ const BasketPage = () => {
                     ))}
                     </TableBody>
                 </Table>
-                </TableContainer>
+            </TableContainer>
+            <BasketSummary></BasketSummary>
         </Box>
     )
 }
