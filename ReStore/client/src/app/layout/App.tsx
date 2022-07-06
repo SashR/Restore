@@ -17,6 +17,7 @@ import agent from "../api/agent";
 import LoadingComponent from "./LoadingComponent";
 import { useStoreContext } from "../context/StoreContext";
 import { getCookie } from "../util/util";
+import CheckoutPage from "../features/checkout/CheckoutPage";
 
 const darkTheme = createTheme({
   palette: {
@@ -91,6 +92,7 @@ function App() {
           <Route path='/catalog' element={<Catalog />} />
           <Route path="/catalog/:id" element={<ProductDetailsPage />} />
           <Route path='/basket' element={<BasketPage />} />
+          <Route path='/checkout' element={<CheckoutPage />} />
           <Route path='/contacts' element={<ContactPage />} />
           <Route path='/about' element={<AboutPage />} />
           <Route path='/server-error' element={<ServerError />} />

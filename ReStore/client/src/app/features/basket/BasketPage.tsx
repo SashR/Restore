@@ -1,8 +1,9 @@
 import { Add, Delete, Remove } from "@mui/icons-material";
 import { LoadingButton } from "@mui/lab";
-import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
+import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import agent from "../../api/agent";
 import { useStoreContext } from "../../context/StoreContext";
 import { formatMoney } from "../../util/util";
@@ -42,7 +43,7 @@ const BasketPage = () => {
     if(!basket) return <Typography sx={{mt:12}}> Your basket is empty </Typography>;
 
     return (
-        <Box sx={{mt: 12}}>
+        <Box sx={{mt: 12, mb: 6}}>
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
@@ -100,6 +101,9 @@ const BasketPage = () => {
                 </Table>
             </TableContainer>
             <BasketSummary></BasketSummary>
+            <Button component={Link} to="/checkout" fullWidth size="large" variant="contained"> 
+            Checkout 
+            </Button>
         </Box>
     )
 }

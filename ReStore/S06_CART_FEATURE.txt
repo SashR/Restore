@@ -278,3 +278,56 @@ Changes made to this file; BasketSummary.tsx; BasketPage.tsx; utils.ts
 Changes made to this page, producTdetailsPage.tsx;  StoreContext.tsx; Basket.cs
 
 *************               Lesson 82: Adding a checkout page                **************
+-- Added checkout page shell
+-- Added link to checkout page
+-- We need authentication for this checkout page
+
+
+
+*************               Lesson 80: Introduction                **************
+-- Will cover redux, redux tkt, redux devtools
+-- Redux has a 
+    -- Store (like a local database), 
+    -- a Provider (provides state, more powerful and scalable than React Context) (from react redux)
+    -- Actions, that can be dispatched from inside components (think of endpoints)
+    -- a Reducer to handle actions (think of API Logic)
+
+-- Best practices
+    -- Do not mutate state, create new state and replace old
+    -- Reducers must not have side-effects (pure functions)
+    -- Do not have non-serializable values in State or Actions
+    -- Only 1 store per applications
+
+-- Redux toolkit
+    -- Opinionated
+    -- Simplifies Redux code
+    -- Good defaults for store setup
+    -- Most commonly used Redux add-ons built in
+    -- Less Boilerplate
+
+-- Existing functionality involving state management will be transferred to Redux
+-- Only major differences is the products array will be stored locally via Redux store
+
+
+*************               Lesson 81: Installing and using Redux               **************
+-- Need to install redux toolkit and redux
+
+-- Contacts page to be usedd as testing ground
+
+
+*************               Lesson 8                **************
+*************               Lesson 8                **************
+*************               Lesson 8                **************
+*************               Lesson 8                **************
+
+
+*************               Lesson 9                **************
+*************               Lesson 9                **************
+*************               Lesson 9                **************
+*************               Lesson 9                **************
+*************               Lesson 9                **************
+*************               Lesson 9                **************
+*************               Lesson 9                **************
+*************               Lesson 9                **************
+*************               Lesson 9                **************
+*************               Lesson 9                **************
