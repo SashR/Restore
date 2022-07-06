@@ -1,15 +1,47 @@
-import { Divider, Grid, Table, TableBody, TableCell, TableContainer, TableRow, Typography } from "@mui/material";
+import { LoadingButton } from "@mui/lab";
+import { Divider, Grid, Table, TableBody, TableCell, TableContainer, TableRow, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import agent from "../../api/agent";
+import { useStoreContext } from "../../context/StoreContext";
 import NotFound from "../../errors/NotFound";
 import LoadingComponent from "../../layout/LoadingComponent";
 import { Product } from "../../models/product";
 
 const ProductDetailsPage = () => {
     const {id} = useParams();
+    const {basket, removeItem, setBasket} = useStoreContext();
+
+
     const [product, setProduct] = useState<Product | null>(null);
-    const [loading, setLoading] = useState<Boolean>(true);
+    const [loading, setLoading] = useState(true);
+    const [loadingUpdate, setLoadingUpdate] = useState(false);
+    const basketItem = id ? basket?.items.find(it => it.productId === parseInt(id)) : null;
+
+    const [basketQuantity, setBasketQuantity] = useState<number>(0);
+
+
+    const changeQuantityHandler = (ev: any) => {
+        if(ev.target.value >= 0) setBasketQuantity(parseInt(ev.target.value));
+    }
+
+    const updateQuantityHandler = async () => {
+        setLoadingUpdate(true);
+        try{
+            const bIquantity = basketItem ? basketItem.quantity : 0;
+            if(id) {
+                if(bIquantity > basketQuantity){
+                    await agent.Basket.removeItem(parseInt(id), bIquantity - basketQuantity);
+                    removeItem(parseInt(id), bIquantity - basketQuantity);
+                } else {
+                    setBasket(await agent.Basket.addItem(parseInt(id), basketQuantity - bIquantity));
+                }
+            }
+        }catch(e: any){
+            console.log(e);
+        }
+        setLoadingUpdate(false);
+    }
 
     useEffect(()=>{
         const fetchProduct = async () => {
@@ -21,7 +53,8 @@ const ProductDetailsPage = () => {
             setLoading(false);
         }
         fetchProduct();
-    },[id])
+        if(id) setBasketQuantity(basketItem?.quantity ?? 0);
+    },[id, basketItem])
 
     if(loading) return <LoadingComponent message="Loading product ..." />;
 
@@ -63,6 +96,32 @@ const ProductDetailsPage = () => {
                         </TableBody>
                     </Table>
                 </TableContainer>
+                <Grid container spacing={2}>
+                    <Grid item xs={6}>
+                        <TextField
+                            variant="outlined"
+                            type='number'
+                            label='Quantity in Cart'
+                            fullWidth
+                            value={basketQuantity}
+                            onChange={changeQuantityHandler}
+                        />
+                    </Grid>
+                    <Grid item xs={6}>
+                        <LoadingButton
+                            disabled={(!basketItem && basketQuantity === 0 ) || basketQuantity === basketItem?.quantity!}
+                            sx={{height: '55px'}}
+                            color='primary'
+                            size='large'
+                            variant='contained'
+                            fullWidth
+                            onClick={updateQuantityHandler}
+                            loading={loadingUpdate}
+                        >
+                            { basketItem?.quantity! > 0 ? 'Update Quantity' : 'Add to Cart' }
+                        </LoadingButton>
+                    </Grid>
+                </Grid>
             </Grid>
         </Grid>
     )

@@ -13,14 +13,14 @@ namespace API.Entities
 
         public List<BasketItem> Items {get; set;} = new();
 
-        public void AddItem(Product product, int quantity)
+        public void AddItem(Product product, int quantity = 1)
         {
             if (Items.All(item => item.ProductId != product.Id))  // If item not in in basket
             {
                 Items.Add(new BasketItem
                 {
                     Product = product,
-                    Quantity = 1,
+                    Quantity = quantity,
                 });
             }
             var existingItem = Items.FirstOrDefault(item => item.ProductId == product.Id);

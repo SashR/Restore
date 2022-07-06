@@ -45,7 +45,9 @@ const ProductCard = ({product}: Props) => {
                 </Typography>
             </CardContent>
             <CardActions>
-                <LoadingButton loading={loading} size="small" onClick={()=>addItemHandler(product.id)} >Add to Card</LoadingButton>
+                <LoadingButton loading={loading} size="small" onClick={()=>addItemHandler(product.id)} >
+                    Add to Cart
+                    </LoadingButton>
                 <Button component={Link} to={`/catalog/${product.id}`} size="small">View</Button>
             </CardActions>
         </Card>

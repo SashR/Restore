@@ -23,12 +23,12 @@ export const useStoreContext = () => {
 export const StoreProvider = ({children} : PropsWithChildren<any> ) => {
     const [basket, setBasket] = useState<Basket | null>(null);
 
-    const removeItem = (productId: number, quantity: number) => {
+    const removeItem = (productId: number, quantity=1) => {
         if(!basket) return; // no basket
         const items = [...basket.items]; // copy of items
         const itemIndex = items.findIndex(i => i.productId === productId);
         if(itemIndex >=0){      // ensure item is found
-            items[itemIndex].quantity -= 1;
+            items[itemIndex].quantity -= quantity;
             // Remove item if quantity is zero
             if(items[itemIndex].quantity === 0) items.splice(itemIndex, 1);
             setBasket((prevState: any) => { return {...prevState, items}});

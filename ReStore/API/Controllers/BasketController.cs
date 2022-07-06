@@ -55,7 +55,7 @@ namespace API.Controllers
 
         // Endpoint for removing an item from the basket
         [HttpDelete]
-        public async Task<ActionResult> RebmoveItemFromBasket(int productId, int quantity)
+        public async Task<ActionResult> RemoveItemFromBasket(int productId, int quantity)
         {
             // Get basket
             var basket = await RetrieveBasket(); // return basket or null (default for any object)

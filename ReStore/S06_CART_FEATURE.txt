@@ -273,4 +273,8 @@ Changes made to this file; BasketSummary.tsx; BasketPage.tsx; utils.ts
 
 
 *************               Lesson 80-81: Product details add items to cart                **************
+-- Personal implementation was not so great
+
+Changes made to this page, producTdetailsPage.tsx;  StoreContext.tsx; Basket.cs
+
 *************               Lesson 82: Adding a checkout page                **************
