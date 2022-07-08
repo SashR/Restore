@@ -11,10 +11,6 @@ const initialState: CounterState = {
     title: "Counter test"
 }
 
-// export default function counterReducer(state = initialState, actions: any){
-//     return state;
-// }
-
 export const counterSlice = createSlice({
     name: 'counter',
     initialState,
