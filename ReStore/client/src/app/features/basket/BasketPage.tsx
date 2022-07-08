@@ -19,7 +19,7 @@ interface LoadingDetails {
 const BasketPage = () => {
     const dispatch = useAppDispatch();
     const {basket} = useAppSelector(store => store.basket);
-    // const {removeItem} = useStoreContext();
+    console.log(basket);
     const [loading, setLoading] = useState<LoadingDetails>();
 
     const removeItemHandler = async (pId: number, qty = 1, type = 'rem') => {
@@ -43,7 +43,8 @@ const BasketPage = () => {
         setLoading({value: false, id: pId, type: 'add'});
     }
 
-    if(!basket) return <Typography sx={{mt:12}}> Your basket is empty </Typography>;
+    if(!basket || basket.items.length === 0) 
+        return <Typography variant="h3" sx={{mt:12}}> Your basket is empty </Typography>;
 
     return (
         <Box sx={{mt: 12, mb: 6}}>
