@@ -21,10 +21,13 @@ const productsSlice = createSlice({
         loadProducts: (state: ProductsState, action: PayloadAction<Product[]>) => {
             state.products = action.payload;
             state.productsLoaded = true;
+        },
+        setProductId: (state: ProductsState, action: PayloadAction<number>) => {
+            state.productId = action.payload;
         }
     }
 });
 
-export const { loadProducts } = productsSlice.actions;
+export const { loadProducts, setProductId } = productsSlice.actions;
 export const getProducts = (state: RootState) => state.products.products;
 export default productsSlice.reducer;

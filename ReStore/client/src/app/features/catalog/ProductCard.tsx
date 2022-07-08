@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import agent from "../../api/agent";
 import { useStoreContext } from "../../context/StoreContext";
 import { Product } from "../../models/product";
+import { useAppDispatch } from "../../store/hooks";
+import { setProductId } from "../../store/slices/productsSlice";
 
 interface Props {
     product: Product,
@@ -14,7 +16,14 @@ interface Props {
 const ProductCard = ({product}: Props) => {
     const [loading, setLoading] = useState<boolean>(false);
     const {setBasket} = useStoreContext();
+    const dispatch = useAppDispatch();
 
+    // save product id to store
+    const viewProduct = (id: number) => {
+        dispatch(setProductId(id));
+    }
+
+    // Add item to cart
     const addItemHandler = async (pId: any) => {
         setLoading(true);
         try {
@@ -48,7 +57,14 @@ const ProductCard = ({product}: Props) => {
                 <LoadingButton loading={loading} size="small" onClick={()=>addItemHandler(product.id)} >
                     Add to Cart
                     </LoadingButton>
-                <Button component={Link} to={`/catalog/${product.id}`} size="small">View</Button>
+                <Button 
+                    onClick={()=>viewProduct(product.id)} 
+                    component={Link} 
+                    to={`/catalog/${product.id}`} 
+                    size="small"
+                >
+                    View
+                </Button>
             </CardActions>
         </Card>
     )

@@ -7,11 +7,12 @@ import { useStoreContext } from "../../context/StoreContext";
 import NotFound from "../../errors/NotFound";
 import LoadingComponent from "../../layout/LoadingComponent";
 import { Product } from "../../models/product";
+import { useAppSelector } from "../../store/hooks";
 
 const ProductDetailsPage = () => {
     const {id} = useParams();
     const {basket, removeItem, setBasket} = useStoreContext();
-
+    const {products} = useAppSelector(store => store.products);
 
     const [product, setProduct] = useState<Product | null>(null);
     const [loading, setLoading] = useState(true);
@@ -44,17 +45,11 @@ const ProductDetailsPage = () => {
     }
 
     useEffect(()=>{
-        const fetchProduct = async () => {
-            try {
-                setProduct(await agent.Catalog.details(id ? parseInt(id) : 0));
-            } catch(e: any){
-                console.log(e);
-            }
-            setLoading(false);
-        }
-        fetchProduct();
+        const p = id ? products.find((pd: Product) => pd.id === parseInt(id)) : null;
+        setProduct(p ? p : null);
+        setLoading(false);
         if(id) setBasketQuantity(basketItem?.quantity ?? 0);
-    },[id, basketItem])
+    },[id, basketItem, products])
 
     if(loading) return <LoadingComponent message="Loading product ..." />;
 

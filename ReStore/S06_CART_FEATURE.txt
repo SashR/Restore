@@ -329,6 +329,15 @@ Changes made to this page, producTdetailsPage.tsx;  StoreContext.tsx; Basket.cs
 
 ######################## Entire section will be done manually ################################
 
+### Products
+-- Created products slice with products, productId and productsLoaded
+-- replaced state logic in catalog component to manage products and loading.
+-- Loading no longer re runs when moving back to Catalog page
+
+## Product details
+
+
+
 *************               Lesson 8                **************
 *************               Lesson 8                **************
 *************               Lesson 8                **************

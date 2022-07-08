@@ -1,6 +1,6 @@
 import Button from '@mui/material/Button';
 import ProductList from "./ProductList";
-import { useState, useEffect, useCallback } from "react";
+import { useEffect, useCallback } from "react";
 import { Typography } from "@mui/material";
 import agent from "../../api/agent";
 import LoadingComponent from "../../layout/LoadingComponent";
