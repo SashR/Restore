@@ -3,9 +3,9 @@ import { Avatar, Button, Card, CardActions, CardContent, CardHeader, CardMedia, 
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import agent from "../../api/agent";
-import { useStoreContext } from "../../context/StoreContext";
 import { Product } from "../../models/product";
 import { useAppDispatch } from "../../store/hooks";
+import { storeBasket } from "../../store/slices/basketSlice";
 
 interface Props {
     product: Product,
@@ -13,14 +13,13 @@ interface Props {
 
 const ProductCard = ({product}: Props) => {
     const [loading, setLoading] = useState<boolean>(false);
-    const {setBasket} = useStoreContext();
     const dispatch = useAppDispatch();
 
     // Add item to cart
     const addItemHandler = async (pId: any) => {
         setLoading(true);
         try {
-            setBasket(await agent.Basket.addItem(pId));
+            dispatch(storeBasket(await agent.Basket.addItem(pId)));
         }catch(e: any){
             console.log(e);
         }

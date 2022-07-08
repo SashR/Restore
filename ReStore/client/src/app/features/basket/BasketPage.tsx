@@ -5,7 +5,8 @@ import { Box } from "@mui/system";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import agent from "../../api/agent";
-import { useStoreContext } from "../../context/StoreContext";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { removeItem, storeBasket } from "../../store/slices/basketSlice";
 import { formatMoney } from "../../util/util";
 import BasketSummary from "./BasketSummary";
 
@@ -16,14 +17,16 @@ interface LoadingDetails {
 }
 
 const BasketPage = () => {
-    const { basket, removeItem, setBasket } = useStoreContext();
+    const dispatch = useAppDispatch();
+    const {basket} = useAppSelector(store => store.basket);
+    // const {removeItem} = useStoreContext();
     const [loading, setLoading] = useState<LoadingDetails>();
 
     const removeItemHandler = async (pId: number, qty = 1, type = 'rem') => {
         setLoading({value: true, id: pId, type: type});
         try{
             await agent.Basket.removeItem(pId, qty);
-            removeItem(pId, qty);
+            dispatch(removeItem({productId: pId, quantity: qty}));
         }catch(e: any){
             console.log(e);
         }
@@ -33,7 +36,7 @@ const BasketPage = () => {
     const addItemHandler = async (pId: any) => {
         setLoading({value: true, id: pId, type: 'add'});
         try {
-            setBasket(await agent.Basket.addItem(pId));
+            dispatch(storeBasket(await agent.Basket.addItem(pId)));
         }catch(e: any){
             console.log(e);
         }
