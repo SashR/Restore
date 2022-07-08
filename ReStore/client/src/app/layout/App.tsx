@@ -15,9 +15,10 @@ import NotFound from "../errors/NotFound";
 import BasketPage from "../features/basket/BasketPage";
 import agent from "../api/agent";
 import LoadingComponent from "./LoadingComponent";
-import { useStoreContext } from "../context/StoreContext";
 import { getCookie } from "../util/util";
 import CheckoutPage from "../features/checkout/CheckoutPage";
+import { useAppDispatch } from "../store/hooks";
+import { storeBasket } from "../store/slices/basketSlice";
 
 const darkTheme = createTheme({
   palette: {
@@ -53,7 +54,8 @@ const customTheme = createTheme({
 });
 
 function App() {
-  const {setBasket} = useStoreContext();
+  const dispatch = useAppDispatch();
+
   const [loading, setLoading] = useState<Boolean>(true);
 
   const [theme, setTheme] = useState<Boolean>(false);
@@ -67,13 +69,13 @@ function App() {
     const buyerId = getCookie('buyerId');
     if(buyerId){
       try {
-        setBasket(await agent.Basket.get());
+        dispatch(storeBasket(await agent.Basket.get()));
       } catch(e: any) {
           console.log(e);
       }
     }
     setLoading(false);
-}, [setBasket]);
+}, [dispatch]);
 
   useEffect(()=>{
     fetchBasket();

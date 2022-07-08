@@ -1,4 +1,3 @@
-
 import { LoadingButton } from "@mui/lab";
 import { Avatar, Button, Card, CardActions, CardContent, CardHeader, CardMedia, Typography } from "@mui/material";
 import { useState } from "react";
@@ -7,7 +6,6 @@ import agent from "../../api/agent";
 import { useStoreContext } from "../../context/StoreContext";
 import { Product } from "../../models/product";
 import { useAppDispatch } from "../../store/hooks";
-import { setProductId } from "../../store/slices/productsSlice";
 
 interface Props {
     product: Product,
@@ -17,11 +15,6 @@ const ProductCard = ({product}: Props) => {
     const [loading, setLoading] = useState<boolean>(false);
     const {setBasket} = useStoreContext();
     const dispatch = useAppDispatch();
-
-    // save product id to store
-    const viewProduct = (id: number) => {
-        dispatch(setProductId(id));
-    }
 
     // Add item to cart
     const addItemHandler = async (pId: any) => {
@@ -58,7 +51,6 @@ const ProductCard = ({product}: Props) => {
                     Add to Cart
                     </LoadingButton>
                 <Button 
-                    onClick={()=>viewProduct(product.id)} 
                     component={Link} 
                     to={`/catalog/${product.id}`} 
                     size="small"

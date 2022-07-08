@@ -1,7 +1,7 @@
 import { ShoppingCartCheckout } from "@mui/icons-material";
 import { AppBar, Badge, Box, FormControlLabel, FormGroup, IconButton, List, ListItemButton, Switch, Toolbar, Typography } from "@mui/material";
 import { NavLink } from "react-router-dom";
-import { useStoreContext } from "../context/StoreContext";
+import { useAppSelector } from "../store/hooks";
 
 interface Props {
     theme: Boolean,
@@ -19,7 +19,7 @@ const rightLinks = [
 ];
 
 const Header = (props: Props) => {
-    const { basket } = useStoreContext();
+    const {basket} = useAppSelector(state => state.basket);
     const itemsCount = basket?.items.reduce((sum, it) => sum + it.quantity, 0);
 
     const {theme, setTheme} = props; 
