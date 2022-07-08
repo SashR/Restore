@@ -3,15 +3,16 @@ import { Divider, Grid, Table, TableBody, TableCell, TableContainer, TableRow, T
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import agent from "../../api/agent";
-import { useStoreContext } from "../../context/StoreContext";
 import NotFound from "../../errors/NotFound";
 import LoadingComponent from "../../layout/LoadingComponent";
 import { Product } from "../../models/product";
-import { useAppSelector } from "../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { removeItem, storeBasket } from "../../store/slices/basketSlice";
 
 const ProductDetailsPage = () => {
     const {id} = useParams();
-    const {basket, removeItem, setBasket} = useStoreContext();
+    const dispatch = useAppDispatch();
+    const {basket} = useAppSelector(state => state.basket);
     const {products} = useAppSelector(store => store.products);
 
     const [product, setProduct] = useState<Product | null>(null);
@@ -31,11 +32,12 @@ const ProductDetailsPage = () => {
         try{
             const bIquantity = basketItem ? basketItem.quantity : 0;
             if(id) {
-                if(bIquantity > basketQuantity){
-                    await agent.Basket.removeItem(parseInt(id), bIquantity - basketQuantity);
-                    removeItem(parseInt(id), bIquantity - basketQuantity);
+                const quantityDiff = bIquantity - basketQuantity; 
+                if(quantityDiff > 0){
+                    await agent.Basket.removeItem(parseInt(id), quantityDiff);
+                    dispatch(removeItem({productId: parseInt(id), quantity: quantityDiff}));
                 } else {
-                    setBasket(await agent.Basket.addItem(parseInt(id), basketQuantity - bIquantity));
+                    dispatch(storeBasket(await agent.Basket.addItem(parseInt(id), -1*quantityDiff)));
                 }
             }
         }catch(e: any){
