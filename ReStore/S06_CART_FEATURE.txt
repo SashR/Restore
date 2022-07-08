@@ -314,6 +314,20 @@ Changes made to this page, producTdetailsPage.tsx;  StoreContext.tsx; Basket.cs
 
 -- Contacts page to be usedd as testing ground
 
+-- Reducer needs:
+    -- state shape
+    -- initial state
+    -- reducer function
+
+-- store creation done via:
+    -- configureStore function
+    -- needs Reducers
+
+-- Provider component must wrap around app, pass store to it
+-- useSelector hook used to used state inside components
+
+
+######################## Entire section will be done manually ################################
 
 *************               Lesson 8                **************
 *************               Lesson 8                **************

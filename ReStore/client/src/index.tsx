@@ -6,8 +6,13 @@ import reportWebVitals from './reportWebVitals';
 import { unstable_HistoryRouter as HistoryRouter } from 'react-router-dom';
 import {createBrowserHistory} from 'history';
 import { StoreProvider } from './app/context/StoreContext';
+import { store } from './app/store/store';
+import { Provider } from 'react-redux';
 
 export const history = createBrowserHistory({window});
+
+// const store = storeConfig();
+// console.log(store.getState());
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -16,7 +21,9 @@ root.render(
   <React.StrictMode>
     <HistoryRouter history={history}>
       <StoreProvider>
-        <App />
+        <Provider store={store}>
+          <App />
+        </Provider>
       </StoreProvider>
     </HistoryRouter>
   </React.StrictMode>
