@@ -3,14 +3,6 @@ import counterReducer from "../features/contact/counterSlice";
 import productsReducer from "./slices/productsSlice";
 import basketReducer from "./slices/basketSlice";
 
-// export function storeConfig(){
-//     return configureStore({
-//         reducer: {
-//             counter: counterReducer
-//         }
-//     });
-// }
-
 export const store = configureStore({
     reducer: {
         counter: counterReducer,
