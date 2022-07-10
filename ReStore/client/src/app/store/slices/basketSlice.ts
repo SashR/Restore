@@ -22,12 +22,13 @@ const basketSlice = createSlice({
             state.basket = action.payload;
         },
         removeItem: (state: BasketState, action: PayloadAction<RemoveItem>) => {
+            const {productId, quantity} = action.payload;
             if (!state.basket) return;
             const items = [...state.basket.items]; // copy of items
-            const itemIndex = items.findIndex(i => i.productId === action.payload.productId);
+            const itemIndex = items.findIndex(i => i.productId === productId);
 
-            if(itemIndex >=0){      // ensure item is found
-                items[itemIndex].quantity -= action.payload.quantity;
+            if(itemIndex >= 0){      // ensure item is found
+                items[itemIndex].quantity -= quantity;
                 // Remove item if quantity is zero
                 if(items[itemIndex].quantity === 0) items.splice(itemIndex, 1);
                 state.basket.items = items;

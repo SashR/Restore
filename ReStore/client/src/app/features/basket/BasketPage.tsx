@@ -19,7 +19,7 @@ interface LoadingDetails {
 const BasketPage = () => {
     const dispatch = useAppDispatch();
     const {basket} = useAppSelector(store => store.basket);
-    console.log(basket);
+
     const [loading, setLoading] = useState<LoadingDetails>();
 
     const removeItemHandler = async (pId: number, qty = 1, type = 'rem') => {

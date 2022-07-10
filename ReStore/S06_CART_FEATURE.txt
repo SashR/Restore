@@ -338,7 +338,12 @@ Changes made to this page, producTdetailsPage.tsx;  StoreContext.tsx; Basket.cs
 
 
 
-*************               Lesson 8                **************
+*************               Lesson 86. 87. 88                **************
+-- Old redux needed created a reducer function, action type constants, and action creators
+-- Redux toolkit encapsulates this into a createSlice() function, removing need for action type
+    constants and action creators
+
+
 *************               Lesson 8                **************
 *************               Lesson 8                **************
 *************               Lesson 8                **************
