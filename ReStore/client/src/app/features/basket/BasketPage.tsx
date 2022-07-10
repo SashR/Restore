@@ -4,43 +4,27 @@ import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, 
 import { Box } from "@mui/system";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import agent from "../../api/agent";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { removeItem, storeBasket } from "../../store/slices/basketSlice";
+import { addBasketItemAsync, removeBasketItemAsync } from "../../store/slices/basketSlice";
 import { formatMoney } from "../../util/util";
 import BasketSummary from "./BasketSummary";
 
-interface LoadingDetails {
-    id : number;
-    type : string;
-    value : boolean;
-}
-
 const BasketPage = () => {
     const dispatch = useAppDispatch();
-    const {basket} = useAppSelector(store => store.basket);
+    const {basket, status, changeProductId} = useAppSelector(store => store.basket);
+    const [multi, setMulti] = useState(false);
 
-    const [loading, setLoading] = useState<LoadingDetails>();
+    const removeItemHandler = (pId: number, qty = 1, mty = false) => {
+        setMulti(mty);
+        dispatch(removeBasketItemAsync({productId: pId, quantity: qty}))
+    };
+    const addItemHandler = (pId: number) => dispatch(addBasketItemAsync({productId: pId}));
 
-    const removeItemHandler = async (pId: number, qty = 1, type = 'rem') => {
-        setLoading({value: true, id: pId, type: type});
-        try{
-            await agent.Basket.removeItem(pId, qty);
-            dispatch(removeItem({productId: pId, quantity: qty}));
-        }catch(e: any){
-            console.log(e);
-        }
-        setLoading({value: false, id: pId, type: 'rem'});
-    }
-
-    const addItemHandler = async (pId: any) => {
-        setLoading({value: true, id: pId, type: 'add'});
-        try {
-            dispatch(storeBasket(await agent.Basket.addItem(pId)));
-        }catch(e: any){
-            console.log(e);
-        }
-        setLoading({value: false, id: pId, type: 'add'});
+    const checkLoading = (pId: number, st: string, mty = false) => {
+        return changeProductId === pId && status === st && multi === mty;
+    };
+    const checkDisabled = (pId: number, st: string, mty = false) => {
+        return status !== 'idle' && !checkLoading(pId, st, mty);
     }
 
     if(!basket || basket.items.length === 0) 
@@ -52,7 +36,7 @@ const BasketPage = () => {
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
                         <TableRow>
-                            <TableCell> Product </TableCell>
+                            <TableCell> Product {multi ? 't' : 'f'} </TableCell>
                             <TableCell align="left"> Price </TableCell>
                             <TableCell align="center"> Quantity </TableCell>
                             <TableCell align="right"> Subtotal </TableCell>
@@ -71,16 +55,16 @@ const BasketPage = () => {
                             <TableCell align="left"> ${(item.price/100).toFixed(2)} </TableCell>
                             <TableCell align="center">
                                 <LoadingButton 
-                                    loading={loading?.value && loading.id === item.productId && loading.type === "rem"}
-                                    disabled={loading?.value && (loading.id !== item.productId || loading.type !== "rem")} 
+                                    loading={checkLoading(item.productId, 'pendingRemoveItem')} 
+                                    disabled={checkDisabled(item.productId, 'pendingRemoveItem')}
                                     color='error' 
                                     onClick={()=>{removeItemHandler(item.productId)}} 
                                 > 
                                     <Remove /> 
                                 </LoadingButton>
                                 <LoadingButton 
-                                    loading={loading?.value && loading.id === item.productId && loading.type === "add"} 
-                                    disabled={loading?.value && (loading.id !== item.productId || loading.type !== "add")}
+                                    loading={checkLoading(item.productId, 'pendingAddItem')} 
+                                    disabled={checkDisabled(item.productId, 'pendingAddItem')}
                                     color='primary' 
                                     onClick={() => {addItemHandler(item.productId)}} 
                                 > 
@@ -91,10 +75,10 @@ const BasketPage = () => {
                             <TableCell align="right"> {formatMoney(item.price * item.quantity)} </TableCell>
                             <TableCell align="right">
                                 <LoadingButton 
-                                    loading={loading?.value && loading.id === item.productId && loading.type === "remall"} 
-                                    disabled={loading?.value && (loading.id !== item.productId || loading.type !== "remall")}
+                                    loading={checkLoading(item.productId, 'pendingRemoveItem',true)} 
+                                    disabled={checkDisabled(item.productId, 'pendingRemoveItem', true)}
                                     color="error" 
-                                    onClick={()=>{removeItemHandler(item.productId, item.quantity, 'remall')}} 
+                                    onClick={()=>{removeItemHandler(item.productId, item.quantity, true)}} 
                                 >
                                     <Delete />
                                 </LoadingButton>

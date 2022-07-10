@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import Catalog from "../features/catalog/Catalog";
 import Header from "./Header";
@@ -13,12 +13,10 @@ import 'react-toastify/dist/ReactToastify.css'; // CSS for toasts
 import ServerError from "../errors/ServerError";
 import NotFound from "../errors/NotFound";
 import BasketPage from "../features/basket/BasketPage";
-import agent from "../api/agent";
 import LoadingComponent from "./LoadingComponent";
-import { getCookie } from "../util/util";
 import CheckoutPage from "../features/checkout/CheckoutPage";
-import { useAppDispatch } from "../store/hooks";
-import { storeBasket } from "../store/slices/basketSlice";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { fetchBasketAsync } from "../store/slices/basketSlice";
 
 const darkTheme = createTheme({
   palette: {
@@ -55,8 +53,7 @@ const customTheme = createTheme({
 
 function App() {
   const dispatch = useAppDispatch();
-
-  const [loading, setLoading] = useState<Boolean>(true);
+  const {status} = useAppSelector(store => store.basket);
 
   const [theme, setTheme] = useState<Boolean>(false);
 
@@ -65,23 +62,11 @@ function App() {
     setTheme(currTheme=> !currTheme);
   }
 
-  const fetchBasket = useCallback( async () => {
-    const buyerId = getCookie('buyerId');
-    if(buyerId){
-      try {
-        dispatch(storeBasket(await agent.Basket.get()));
-      } catch(e: any) {
-          console.log(e);
-      }
-    }
-    setLoading(false);
-}, [dispatch]);
-
   useEffect(()=>{
-    fetchBasket();
-  }, [fetchBasket]);
+    dispatch(fetchBasketAsync());
+  }, [dispatch]);
 
-  if(loading) return <LoadingComponent message="Initializing App ..." />;
+  if(status === 'pendingFetchBasket') return <LoadingComponent message="Initializing App ..." />;
 
   return (
     <ThemeProvider theme={theme ? darkTheme : customTheme}>

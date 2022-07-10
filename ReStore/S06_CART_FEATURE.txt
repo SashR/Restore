@@ -344,12 +344,11 @@ Changes made to this page, producTdetailsPage.tsx;  StoreContext.tsx; Basket.cs
     constants and action creators
 
 
-*************               Lesson 8                **************
-*************               Lesson 8                **************
-*************               Lesson 8                **************
+*************               Lesson 92, 93, 94                **************
+-- Goal is to move asynchronous logic from components to redux
 
+-- The createAsyncThunk method creates some action creators in the background
 
-*************               Lesson 9                **************
 *************               Lesson 9                **************
 *************               Lesson 9                **************
 *************               Lesson 9                **************
