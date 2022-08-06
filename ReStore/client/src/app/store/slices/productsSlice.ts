@@ -6,11 +6,13 @@ import { RootState } from "../store";
 export interface ProductsState {
     products: Product[];
     productsLoaded: boolean;
+    status: 'idle' | 'starting' | 'pendingFetchProduct';
 }
 
 const initialState: ProductsState = {
     products: [],
-    productsLoaded: false
+    productsLoaded: false,
+    status: 'idle'
 }
 
 const productsAdapter = createEntityAdapter<Product>();
@@ -28,15 +30,33 @@ export const fetchProductsAsync = createAsyncThunk<Product[]>(
 
 const productsSlice = createSlice({
     name: 'products',
-    initialState,
+    initialState: productsAdapter.getInitialState({
+        productsLoaded: false,
+        status: 'idle',
+        // products<Product[]>: [],
+    }),
     reducers: {
-        loadProducts: (state: ProductsState, action: PayloadAction<Product[]>) => {
-            state.products = action.payload;
+        // loadProducts: (state: ProductsState, action: PayloadAction<Product[]>) => {
+        //     state.products = action.payload;
+        //     state.productsLoaded = true;
+        // }
+    },
+    extraReducers: (builder => {
+        builder.addCase(fetchProductsAsync.pending, (state) => {
+            state.status = 'pendingFetchProduct';
+        });
+        builder.addCase(fetchProductsAsync.fulfilled, (state, action) => {
+            productsAdapter.setAll(state, action.payload);
             state.productsLoaded = true;
-        }
+            state.status = 'idle';
+        });
+        builder.addCase(fetchProductsAsync.rejected, (state) => {
+            state.status = 'idle';
+        });
     }
+    )
 });
 
-export const { loadProducts} = productsSlice.actions;
-export const getProducts = (state: RootState) => state.products.products;
+// export const { loadProducts} = productsSlice.actions;
+// export const getProducts = (state: RootState) => state.products.products;
 export default productsSlice.reducer;
