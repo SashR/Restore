@@ -7,12 +7,13 @@ import LoadingComponent from "../../layout/LoadingComponent";
 import { Product } from "../../models/product";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { addBasketItemAsync, removeBasketItemAsync } from "../../store/slices/basketSlice";
+import { productsSelectors } from "../../store/slices/productsSlice";
 
 const ProductDetailsPage = () => {
     const {id} = useParams();
     const dispatch = useAppDispatch();
     const {basket} = useAppSelector(state => state.basket);
-    const {products} = useAppSelector(store => store.products);
+    const products = useAppSelector(productsSelectors.selectAll);
 
     const [product, setProduct] = useState<Product | null>(null);
     const [loading, setLoading] = useState(true);

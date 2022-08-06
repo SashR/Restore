@@ -4,26 +4,25 @@ import { useEffect } from "react";
 import { Typography } from "@mui/material";
 import LoadingComponent from "../../layout/LoadingComponent";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { fetchProductsAsync } from "../../store/slices/productsSlice";
+import { fetchProductsAsync, productsSelectors } from "../../store/slices/productsSlice";
 
 const Catalog = () => {
-    const {products, productsLoaded} = useAppSelector(state => state.products);
+    const {productsLoaded, status} = useAppSelector(state => state.products);
+    const products = useAppSelector(productsSelectors.selectAll);
     const dispatch = useAppDispatch();
 
   // Call for data from server, no dependencies
-    useEffect(()=>{ dispatch(fetchProductsAsync())}, [])
+    useEffect(()=>{ 
+      if(!productsLoaded) dispatch(fetchProductsAsync())
+    }, [productsLoaded, dispatch]);
+
+    if(status === 'pendingFetchProduct') return <LoadingComponent message="Loading products ..." />;
 
     return (
       <>
-        { 
-          !productsLoaded
-          ? <LoadingComponent message="Loading products ..." />
-          : (<>
-            <Typography sx={{marginTop:10, marginBottom: 4}} variant="h2"> Catalog </Typography>
-            <ProductList products={products} />
-            <Button variant="contained" >Add product</Button>
-          </>)
-        }
+        <Typography sx={{marginTop:10, marginBottom: 4}} variant="h2"> Catalog </Typography>
+        <ProductList products={products} />
+        <Button variant="contained" >Add product</Button>
       </>
     )
 }

@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import agent from "../../api/agent";
 import { Basket } from "../../models/basket";
 import { getCookie } from "../../util/util";

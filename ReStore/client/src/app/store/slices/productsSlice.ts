@@ -1,4 +1,4 @@
-import { createAsyncThunk, createEntityAdapter, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createEntityAdapter, createSlice } from "@reduxjs/toolkit";
 import agent from "../../api/agent";
 import { Product } from "../../models/product";
 import { RootState } from "../store";
@@ -7,12 +7,6 @@ export interface ProductsState {
     products: Product[];
     productsLoaded: boolean;
     status: 'idle' | 'starting' | 'pendingFetchProduct';
-}
-
-const initialState: ProductsState = {
-    products: [],
-    productsLoaded: false,
-    status: 'idle'
 }
 
 const productsAdapter = createEntityAdapter<Product>();
@@ -33,14 +27,8 @@ const productsSlice = createSlice({
     initialState: productsAdapter.getInitialState({
         productsLoaded: false,
         status: 'idle',
-        // products<Product[]>: [],
     }),
-    reducers: {
-        // loadProducts: (state: ProductsState, action: PayloadAction<Product[]>) => {
-        //     state.products = action.payload;
-        //     state.productsLoaded = true;
-        // }
-    },
+    reducers: {},
     extraReducers: (builder => {
         builder.addCase(fetchProductsAsync.pending, (state) => {
             state.status = 'pendingFetchProduct';
@@ -57,6 +45,5 @@ const productsSlice = createSlice({
     )
 });
 
-// export const { loadProducts} = productsSlice.actions;
-// export const getProducts = (state: RootState) => state.products.products;
+export const productsSelectors = productsAdapter.getSelectors((state:RootState)=> state.products);
 export default productsSlice.reducer;
