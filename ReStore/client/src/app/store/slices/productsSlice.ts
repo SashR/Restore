@@ -1,4 +1,5 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createEntityAdapter, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import agent from "../../api/agent";
 import { Product } from "../../models/product";
 import { RootState } from "../store";
 
@@ -11,6 +12,19 @@ const initialState: ProductsState = {
     products: [],
     productsLoaded: false
 }
+
+const productsAdapter = createEntityAdapter<Product>();
+
+export const fetchProductsAsync = createAsyncThunk<Product[]>(
+    'catalog/fetchProductsAsync',
+    async () => {
+        try {
+            return await agent.Catalog.list();
+        } catch(e){
+            console.log(e);
+        }
+    }
+)
 
 const productsSlice = createSlice({
     name: 'products',

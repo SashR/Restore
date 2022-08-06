@@ -2,12 +2,11 @@ import { LoadingButton } from "@mui/lab";
 import { Divider, Grid, Table, TableBody, TableCell, TableContainer, TableRow, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import agent from "../../api/agent";
 import NotFound from "../../errors/NotFound";
 import LoadingComponent from "../../layout/LoadingComponent";
 import { Product } from "../../models/product";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { removeItem, storeBasket } from "../../store/slices/basketSlice";
+import { addBasketItemAsync, removeBasketItemAsync } from "../../store/slices/basketSlice";
 
 const ProductDetailsPage = () => {
     const {id} = useParams();
@@ -29,19 +28,14 @@ const ProductDetailsPage = () => {
 
     const updateQuantityHandler = async () => {
         setLoadingUpdate(true);
-        try{
-            const bIquantity = basketItem ? basketItem.quantity : 0;
-            if(id) {
-                const quantityDiff = bIquantity - basketQuantity; 
-                if(quantityDiff > 0){
-                    await agent.Basket.removeItem(parseInt(id), quantityDiff);
-                    dispatch(removeItem({productId: parseInt(id), quantity: quantityDiff}));
-                } else {
-                    dispatch(storeBasket(await agent.Basket.addItem(parseInt(id), -1*quantityDiff)));
-                }
+        const bIquantity = basketItem ? basketItem.quantity : 0;
+        if(id) {
+            const quantityDiff = bIquantity - basketQuantity; 
+            if(quantityDiff > 0){
+                dispatch(removeBasketItemAsync({productId: parseInt(id), quantity: quantityDiff}));
+            } else {
+                dispatch(addBasketItemAsync({productId: parseInt(id), quantity: -1*quantityDiff}));
             }
-        }catch(e: any){
-            console.log(e);
         }
         setLoadingUpdate(false);
     }

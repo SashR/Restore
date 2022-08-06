@@ -16,7 +16,7 @@ const BasketPage = () => {
 
     const removeItemHandler = (pId: number, qty = 1, mty = false) => {
         setMulti(mty);
-        dispatch(removeBasketItemAsync({productId: pId, quantity: qty}))
+        dispatch(removeBasketItemAsync({productId: pId, quantity: qty}));
     };
     const addItemHandler = (pId: number) => dispatch(addBasketItemAsync({productId: pId}));
 

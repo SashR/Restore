@@ -27,7 +27,7 @@ export const fetchBasketAsync = createAsyncThunk<Basket>(
         const buyerId = getCookie('buyerId');
         if(buyerId){
             try {
-                return agent.Basket.get();
+                return await agent.Basket.get();
             } catch(e){
                 console.log(e);
             }
@@ -62,25 +62,7 @@ export const removeBasketItemAsync = createAsyncThunk<null, ItemChange>(
 const basketSlice = createSlice({
     name: 'basket',
     initialState,
-    reducers: {
-        storeBasket: (state: BasketState, action: PayloadAction<Basket>) => {
-            state.basket = action.payload;
-        },
-        removeItem: (state: BasketState, action: PayloadAction<ItemChange>) => {
-            const {productId, quantity} = action.payload;
-            const qty = quantity ? quantity : 1;
-            if (!state.basket) return;
-            const items = [...state.basket.items]; // copy of items
-            const itemIndex = items.findIndex(i => i.productId === productId);
-
-            if(itemIndex >= 0){      // ensure item is found
-                items[itemIndex].quantity -= qty;
-                // Remove item if quantity is zero
-                if(items[itemIndex].quantity === 0) items.splice(itemIndex, 1);
-                state.basket.items = items;
-            }
-        }
-    },
+    reducers: {},
     extraReducers: (builder => {
         // Add item to basket actions
         builder.addCase(addBasketItemAsync.pending, (state, action) => {
@@ -133,6 +115,5 @@ const basketSlice = createSlice({
     })
 });
 
-export const {storeBasket, removeItem} = basketSlice.actions;
 export default basketSlice.reducer;
 export const getBasketItems = (state: RootState) => state.basket.basket?.items;
