@@ -16,7 +16,7 @@ const Catalog = () => {
       if(!productsLoaded) dispatch(fetchProductsAsync())
     }, [productsLoaded, dispatch]);
 
-    if(status === 'pendingFetchProduct') return <LoadingComponent message="Loading products ..." />;
+    if(status === 'pendingFetchProducts') return <LoadingComponent message="Loading products ..." />;
 
     return (
       <>

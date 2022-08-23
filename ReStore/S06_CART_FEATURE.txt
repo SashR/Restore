@@ -349,7 +349,13 @@ Changes made to this page, producTdetailsPage.tsx;  StoreContext.tsx; Basket.cs
 
 -- The createAsyncThunk method creates some action creators in the background
 
-*************               Lesson 9                **************
+*************               Lesson 98: Fetching a single product                **************
+-- Need to avoid re-fetching the product everytime you navigate to product details
+-- Need to be careful of the refreshing the page which will clear the state
+
+Changes made to this file, productsSlice.ts, Catalog.tsx, producTdetailsPage
+
+
 *************               Lesson 9                **************
 *************               Lesson 9                **************
 *************               Lesson 9                **************

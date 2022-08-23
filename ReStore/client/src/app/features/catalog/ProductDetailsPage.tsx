@@ -4,20 +4,18 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import NotFound from "../../errors/NotFound";
 import LoadingComponent from "../../layout/LoadingComponent";
-import { Product } from "../../models/product";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { addBasketItemAsync, removeBasketItemAsync } from "../../store/slices/basketSlice";
-import { productsSelectors } from "../../store/slices/productsSlice";
+import { fetchProductAsync, productsSelectors } from "../../store/slices/productsSlice";
 
 const ProductDetailsPage = () => {
     const {id} = useParams();
     const dispatch = useAppDispatch();
     const {basket} = useAppSelector(state => state.basket);
-    const products = useAppSelector(productsSelectors.selectAll);
 
-    const [product, setProduct] = useState<Product | null>(null);
-    const [loading, setLoading] = useState(true);
-    const [loadingUpdate, setLoadingUpdate] = useState(false);
+    const product = useAppSelector(state => productsSelectors.selectById(state, id!));
+    const {status} = useAppSelector(state => state.products);
+    const {status: updateStatus} = useAppSelector(state => state.basket);
     const basketItem = id ? basket?.items.find(it => it.productId === parseInt(id)) : null;
 
     const [basketQuantity, setBasketQuantity] = useState<number>(0);
@@ -28,27 +26,20 @@ const ProductDetailsPage = () => {
     }
 
     const updateQuantityHandler = async () => {
-        setLoadingUpdate(true);
         const bIquantity = basketItem ? basketItem.quantity : 0;
         if(id) {
             const quantityDiff = bIquantity - basketQuantity; 
-            if(quantityDiff > 0){
-                dispatch(removeBasketItemAsync({productId: parseInt(id), quantity: quantityDiff}));
-            } else {
-                dispatch(addBasketItemAsync({productId: parseInt(id), quantity: -1*quantityDiff}));
-            }
+            if(quantityDiff > 0) dispatch(removeBasketItemAsync({productId: parseInt(id), quantity: quantityDiff}));
+            else dispatch(addBasketItemAsync({productId: parseInt(id), quantity: -1*quantityDiff}));
         }
-        setLoadingUpdate(false);
     }
 
     useEffect(()=>{
-        const p = id ? products.find((pd: Product) => pd.id === parseInt(id)) : null;
-        setProduct(p ? p : null);
-        setLoading(false);
+        if (!product) dispatch(fetchProductAsync(parseInt(id!)));
         if(id) setBasketQuantity(basketItem?.quantity ?? 0);
-    },[id, basketItem, products])
+    },[id, basketItem, product, dispatch])
 
-    if(loading) return <LoadingComponent message="Loading product ..." />;
+    if(status === 'pendingFetchProduct') return <LoadingComponent message="Loading product ..." />;
 
     if(!product) return <NotFound />;
 
@@ -108,7 +99,7 @@ const ProductDetailsPage = () => {
                             variant='contained'
                             fullWidth
                             onClick={updateQuantityHandler}
-                            loading={loadingUpdate}
+                            loading={updateStatus === "pendingAddItem" || updateStatus === "pendingRemoveItem"}
                         >
                             { basketItem?.quantity! > 0 ? 'Update Quantity' : 'Add to Cart' }
                         </LoadingButton>
