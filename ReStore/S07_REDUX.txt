@@ -92,7 +92,12 @@ Changes made to this file, S06_CART_FEATURE,  productSlice.ts
 
 
 
-*************               Lesson 9                **************
+*************               Lesson 100: error handling in the basket slice               **************
+repeating previous work but for the basket slice
+
+-- changes made to this file, basketSlice, BasketController
+
+
 *************               Lesson 9                **************
 *************               Lesson 9                **************
 *************               Lesson 9                **************

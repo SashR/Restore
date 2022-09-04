@@ -23,13 +23,13 @@ const initialState: BasketState = {
 // Asynchronous code
 export const fetchBasketAsync = createAsyncThunk<Basket>(
     'basket/fetchBasketAsync',
-    async () => {
+    async (_, thunkAPI) => {
         const buyerId = getCookie('buyerId');
         if(buyerId){
             try {
                 return await agent.Basket.get();
-            } catch(e){
-                console.log(e);
+            } catch(e: any){
+                return thunkAPI.rejectWithValue({error: e.data});
             }
         }
     }
@@ -37,11 +37,11 @@ export const fetchBasketAsync = createAsyncThunk<Basket>(
 
 export const addBasketItemAsync = createAsyncThunk<Basket, ItemChange>(
     'basket/AddBasketItemAsync',
-    async ({productId, quantity = 1}) => {
+    async ({productId, quantity = 1}, thunkAPI) => {
         try {
             return await agent.Basket.addItem(productId, quantity);
-        } catch(e){
-            console.log(e);
+        } catch(e: any){
+            return thunkAPI.rejectWithValue({error: e.data});
         }
     }
 )
@@ -49,11 +49,11 @@ export const addBasketItemAsync = createAsyncThunk<Basket, ItemChange>(
 // Remove thunk function
 export const removeBasketItemAsync = createAsyncThunk<null, ItemChange>(
     'basket/RemoveBasketItemAync',
-    async ({productId, quantity = 1}) => {
+    async ({productId, quantity = 1}, thunkAPI) => {
         try {
             return await agent.Basket.removeItem(productId, quantity);
-        } catch(e){
-            console.log(e);
+        } catch(e: any){
+            return thunkAPI.rejectWithValue({error: e.data});
         }
     }
 ) 
