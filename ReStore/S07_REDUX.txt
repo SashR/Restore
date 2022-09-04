@@ -1,0 +1,101 @@
+*************               Lesson 84: Introduction                **************
+-- Will cover redux, redux tkt, redux devtools
+-- Redux has a 
+    -- Store (like a local database), 
+    -- a Provider (provides state, more powerful and scalable than React Context) (from react redux)
+    -- Actions, that can be dispatched from inside components (think of endpoints)
+    -- a Reducer to handle actions (think of API Logic)
+
+-- Best practices
+    -- Do not mutate state, create new state and replace old
+    -- Reducers must not have side-effects (pure functions)
+    -- Do not have non-serializable values in State or Actions
+    -- Only 1 store per applications
+
+-- Redux toolkit
+    -- Opinionated
+    -- Simplifies Redux code
+    -- Good defaults for store setup
+    -- Most commonly used Redux add-ons built in
+    -- Less Boilerplate
+
+-- Existing functionality involving state management will be transferred to Redux
+-- Only major differences is the products array will be stored locally via Redux store
+
+
+*************               Lesson 85: Installing and using Redux               **************
+-- Need to install redux toolkit and redux
+
+-- Contacts page to be usedd as testing ground
+
+-- Reducer needs:
+    -- state shape
+    -- initial state
+    -- reducer function
+
+-- store creation done via:
+    -- configureStore function
+    -- needs Reducers
+
+-- Provider component must wrap around app, pass store to it
+-- useSelector hook used to used state inside components
+
+
+######################## Entire section will be done manually ################################
+
+### Products
+-- Created products slice with products, productId and productsLoaded
+-- replaced state logic in catalog component to manage products and loading.
+-- Loading no longer re runs when moving back to Catalog page
+
+## Product details
+
+
+
+*************               Lesson 86. 87. 88                **************
+-- Old redux needed created a reducer function, action type constants, and action creators
+-- Redux toolkit encapsulates this into a createSlice() function, removing need for action type
+    constants and action creators
+
+
+*************               Lesson 92, 93, 94                **************
+-- Goal is to move asynchronous logic from components to redux
+
+-- The createAsyncThunk method creates some action creators in the background
+
+*************               Lesson 98: Fetching a single product                **************
+-- Need to avoid re-fetching the product everytime you navigate to product details
+-- Need to be careful of the refreshing the page which will clear the state
+
+Changes made to this file, productsSlice.ts, Catalog.tsx, producTdetailsPage
+
+
+*************               Lesson 99: Error Handling in the Reducers                **************
+Previously error handling were only done in agent file,
+We need some error handling inside redux reducers as error such index not found will break our application
+For example try
+-- Done using thunkAPI property
+export const fetchProductAsync = createAsyncThunk<Product, number>(
+    'catalog/fetchProductAsync',
+    async (productId, thunkAPI) => {
+        try {
+            return await agent.Catalog.details(productId);
+        } catch(e: any){
+            return thunkAPI.rejectWithValue({error: e.data});
+        }
+    }
+)
+
+-- Interceptor in axios actually handles the error
+
+Changes made to this file, S06_CART_FEATURE,  productSlice.ts
+
+
+
+*************               Lesson 9                **************
+*************               Lesson 9                **************
+*************               Lesson 9                **************
+*************               Lesson 9                **************
+*************               Lesson 9                **************
+*************               Lesson 9                **************
+*************               Lesson 9                **************
