@@ -60,6 +60,14 @@ Changes made to S07, this file, ProductsController, Extensions\ProductExtensions
 
 Changes made to this file, ProductsController.cs, ProductExtensions.cs
 
+--> Almost correct. Check needs to be normalized
+        public static IQueryable<Product> Search(this IQueryable<Product> query, string searchString)
+        {
+            if(string.IsNullOrWhiteSpace(searchString)) return query;
+            return query.Where(p => p.Name.ToLower().Contains(searchString.Trim().ToLower()));
+        }
+Changes made to this file, ProductExtensions
+
 *************               Lesson 10:                **************
 *************               Lesson 10:                **************
 *************               Lesson 10:                **************

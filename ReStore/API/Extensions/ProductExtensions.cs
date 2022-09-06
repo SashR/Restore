@@ -25,7 +25,7 @@ namespace API.Extensions
         public static IQueryable<Product> Search(this IQueryable<Product> query, string searchString)
         {
             if(string.IsNullOrWhiteSpace(searchString)) return query;
-            return query.Where(p => p.Name.Contains(searchString));
+            return query.Where(p => p.Name.ToLower().Contains(searchString.Trim().ToLower()));
         }
     }
 }
