@@ -50,7 +50,16 @@
 
 Changes made to S07, this file, ProductsController, Extensions\ProductExtensions.cs
 
-*************               Lesson 10:                **************
+*************               Lesson 104: Adding search functionality to the API                **************
+-- Attempted
+        public static IQueryable<Product> Search(this IQueryable<Product> query, string searchString)
+        {
+            if(string.IsNullOrWhiteSpace(searchString)) return query;
+            return query.Where(p => p.Name.Contains(searchString));
+        }
+
+Changes made to this file, ProductsController.cs, ProductExtensions.cs
+
 *************               Lesson 10:                **************
 *************               Lesson 10:                **************
 *************               Lesson 10:                **************

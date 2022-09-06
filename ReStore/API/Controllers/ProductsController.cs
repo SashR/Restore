@@ -18,10 +18,11 @@ namespace API.Controllers
         }
 
         [HttpGet]               // Returns all products -- api/products
-        public async Task<ActionResult<List<Product>>> GetProducts(string orderBy)
+        public async Task<ActionResult<List<Product>>> GetProducts(string orderBy, string searchString)
         {
             var query = _context.Products
                 .Sort(orderBy)
+                .Search(searchString)
                 .AsQueryable();  // Fetches products and allows it to be queried (filtered, etc)
 
             return await query.ToListAsync(); // Executes built up query against DB and returns result
