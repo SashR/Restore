@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using API.Data;
+using API.Extensions;
 
 namespace API.Controllers
 {
@@ -17,9 +18,13 @@ namespace API.Controllers
         }
 
         [HttpGet]               // Returns all products -- api/products
-        public async Task<ActionResult<List<Product>>> GetProducts()
+        public async Task<ActionResult<List<Product>>> GetProducts(string orderBy)
         {
-            return await _context.Products.ToListAsync(); // Returns 200 status with products data
+            var query = _context.Products
+                .Sort(orderBy)
+                .AsQueryable();  // Fetches products and allows it to be queried (filtered, etc)
+
+            return await query.ToListAsync(); // Executes built up query against DB and returns result
         }
 
         [HttpGet("{id}")]       // Pass parameter -- api/products/3

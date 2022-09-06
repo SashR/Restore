@@ -1,0 +1,58 @@
+*************               Lesson 103: Adding sorting to the API                **************
+        public async Task<ActionResult<List<Product>>> GetProducts(string orderBy)
+        {
+            var query = _context.Products.AsQueryable();  // Fetches products and allows it to be queried (filtered, etc)
+
+            query = orderBy switch
+            {
+                "price"     => query.OrderBy(p => p.Price),
+                "priceDesc" => query.OrderByDescending(p => p.Price),
+                _           => query.OrderBy(p => p.Name)
+            };
+
+            return await query.ToListAsync(); // Executes built up query against DB and returns result
+        }
+--> The code will get messy fast with all of the queries.
+--> Alternative is Repository Pattern, which move DB logic from controllers into a central place. Not covered in course
+--> The DBContext class is a combination of the unit of work and the repository pattern.
+--> We will use extension methods, and move queries to that
+
+--> Create folder api\Extensions
+--> Create filter ProductExtensions.cs, all extensions to the Products class held here.
+--> The idea of Extension methods is to essentially extend the functionality of built in classes, in this case it is the IQyueryable class
+
+    public static class ProductExtensions // We do not want to create a new instance whenever we want to use a method here
+    {
+        // All methods will be static
+        public static IQueryable<Product> Sort(this IQueryable<Product> query, string orderBy)
+        {
+            if(string.IsNullOrWhiteSpace(orderBy)) return query.OrderBy(p => p.Name);
+
+            query = orderBy switch
+            {
+                "price"     => query.OrderBy(p => p.Price),
+                "priceDesc" => query.OrderByDescending(p => p.Price),
+                _           => query.OrderBy(p => p.Name)
+            };
+
+            return query;
+        }
+    }
+--> Query code goes inside extension
+        public async Task<ActionResult<List<Product>>> GetProducts(string orderBy)
+        {
+            var query = _context.Products
+                .Sort(orderBy)
+                .AsQueryable();  // Fetches products and allows it to be queried (filtered, etc)
+
+            return await query.ToListAsync(); // Executes built up query against DB and returns result
+        }
+
+Changes made to S07, this file, ProductsController, Extensions\ProductExtensions.cs
+
+*************               Lesson 10:                **************
+*************               Lesson 10:                **************
+*************               Lesson 10:                **************
+*************               Lesson 10:                **************
+*************               Lesson 10:                **************
+*************               Lesson 10:                **************

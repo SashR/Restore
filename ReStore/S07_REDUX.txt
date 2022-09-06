@@ -97,10 +97,3 @@ repeating previous work but for the basket slice
 
 -- changes made to this file, basketSlice, BasketController
 
-
-*************               Lesson 9                **************
-*************               Lesson 9                **************
-*************               Lesson 9                **************
-*************               Lesson 9                **************
-*************               Lesson 9                **************
-*************               Lesson 9                **************
