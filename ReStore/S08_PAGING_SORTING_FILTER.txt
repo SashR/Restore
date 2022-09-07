@@ -105,7 +105,19 @@ Changes made to this file; ProductExtensions; ProductsController
 Changes made to this file; ProductExtensions; ProductsController
 
 
-*************               Lesson 10:                **************
+*************               Lesson 106: Adding a Pagination helper function                **************
+--> If we have a massive amount of data, it is not sensible to return all of that data (1 mil products), when the user
+    can't see them all, and likely won't want to.
+--> To solve this we use pagination to chunk the data we send to the client
+
+--> PaginationParams needs properties for the page number, items size and items max size
+--> A rule of thumb for parameters, its better to move them if they are more than 3
+--> Hence ProductParams class
+
+--> We will have a MetaData class to hold pagination and params details
+
+Changes made to this file, RequestHelpers\PaginationParams.cs; RequestHelpers\ProductParams.cs; RequestHelpers.MetaData.cs
+
 *************               Lesson 10:                **************
 *************               Lesson 10:                **************
 *************               Lesson 10:                **************
