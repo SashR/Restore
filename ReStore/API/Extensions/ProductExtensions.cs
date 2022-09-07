@@ -28,12 +28,21 @@ namespace API.Extensions
             return query.Where(p => p.Name.ToLower().Contains(searchString.Trim().ToLower()));
         }
 
-        public static IQueryable<Product> Filter(this IQueryable<Product> query, string field, string value)
+        public static IQueryable<Product> Filter(this IQueryable<Product> query, string brands, string types)
         {
-            if(string.IsNullOrWhiteSpace(field) || string.IsNullOrWhiteSpace(value)) return query;  // return if either field is empty
-            if(field == "type") return query.Where(p => p.Type == value);   // filter by type
-            else if (field == "brand") return query.Where(p => p.Brand == value);   // filter by brand
-            else return query;  // return without filtering
+            // temp variables creation
+            var brandList = new List<string>();
+            var typeList = new List<string>();
+
+            // Populating Lists
+            if(!string.IsNullOrEmpty(brands)) brandList.AddRange(brands.ToLower().Split(",").ToList());
+            if(!string.IsNullOrEmpty(types)) typeList.AddRange(types.ToLower().Split(",").ToList());
+
+            // Filtering based on lists
+            query = brandList.Count == 0    ? query : query.Where(p => brandList.Contains(p.Brand.ToLower()));
+            query = typeList.Count == 0     ? query : query.Where(p => typeList.Contains(p.Type.ToLower()));
+
+            return query;
         }
     }
 }

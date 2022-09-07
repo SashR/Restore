@@ -83,6 +83,28 @@ Changes made to this file, ProductExtensions
 
 Changes made to this file; ProductExtensions; ProductsController
 
+--> More capable solution below
+        public static IQueryable<Product> Filter(this IQueryable<Product> query, string brands, string types)
+        {
+            // temp variables creation
+            var brandList = new List<string>();
+            var typeList = new List<string>();
+
+            // Populating Lists
+            if(!string.IsNullOrEmpty(brands)) brandList.AddRange(brands.ToLower().Split(",").ToList());
+            if(!string.IsNullOrEmpty(types)) typeList.AddRange(types.ToLower().Split(",").ToList());
+
+            // Filtering based on lists
+            query = brandList.Count == 0    ? query : query.Where(p => brandList.Contains(p.Brand.ToLower()));
+            query = typeList.Count == 0     ? query : query.Where(p => typeList.Contains(p.Type.ToLower()));
+
+            return query;
+        }
+--> Allows for filtering by both types and brands, and multiple of them
+
+Changes made to this file; ProductExtensions; ProductsController
+
+
 *************               Lesson 10:                **************
 *************               Lesson 10:                **************
 *************               Lesson 10:                **************
