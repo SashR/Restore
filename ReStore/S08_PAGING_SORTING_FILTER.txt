@@ -68,7 +68,21 @@ Changes made to this file, ProductsController.cs, ProductExtensions.cs
         }
 Changes made to this file, ProductExtensions
 
-*************               Lesson 10:                **************
+
+
+*************               Lesson 105: Adding filters to the API                **************
+--> Attempted
+        public static IQueryable<Product> Filter(this IQueryable<Product> query, string field, string value)
+        {
+            if(string.IsNullOrWhiteSpace(field) || string.IsNullOrWhiteSpace(value)) return query;  // return if either field is empty
+            if(field == "type") return query.Where(p => p.Type == value);   // filter by type
+            else if (field == "brand") return query.Where(p => p.Brand == value);   // filter by brand
+            else return query;  // return without filtering
+        }
+--> Only capable of adding a single filter
+
+Changes made to this file; ProductExtensions; ProductsController
+
 *************               Lesson 10:                **************
 *************               Lesson 10:                **************
 *************               Lesson 10:                **************
