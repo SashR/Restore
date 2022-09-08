@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using API.Data;
 using API.Extensions;
+using API.RequestHelpers;
+using System.Text.Json;
 
 namespace API.Controllers
 {
@@ -18,15 +20,20 @@ namespace API.Controllers
         }
 
         [HttpGet]               // Returns all products -- api/products
-        public async Task<ActionResult<List<Product>>> GetProducts(string orderBy, string searchString, string brands, string types)
+        public async Task<ActionResult<PagedList<Product>>> GetProducts(ProductParams productParams)
         {
             var query = _context.Products
-                .Sort(orderBy)
-                .Search(searchString)
-                .Filter(brands, types)
+                .Sort(productParams.OrderBy)
+                .Search(productParams.searchString)
+                .Filter(productParams.Types, productParams.Brands)
                 .AsQueryable();  // Fetches products and allows it to be queried (filtered, etc)
 
-            return await query.ToListAsync(); // Executes built up query against DB and returns result
+            var products = await PagedList<Product>.ToPagedList(query, productParams.PageNumber, productParams.pageSize);
+
+            // We will add pagination details to the response headers
+            Response.Headers.Add("Pagination", JsonSerializer.Serialize(products.MetaData));
+
+            return products;
         }
 
         [HttpGet("{id}")]       // Pass parameter -- api/products/3

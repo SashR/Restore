@@ -118,6 +118,16 @@ Changes made to this file; ProductExtensions; ProductsController
 
 Changes made to this file, RequestHelpers\PaginationParams.cs; RequestHelpers\ProductParams.cs; RequestHelpers.MetaData.cs
 
-*************               Lesson 10:                **************
+
+
+
+*************               Lesson 107: Creating a class that extends our List into a PagedList                **************
+--> Combine MetaData (pagination info) to List
+--> Created class for PagedList, combines metadata, provides a function for generating paged list i.e.
+    taking pagination properties and slicing the entire list to generate the specified amount of items
+--> See code for details
+
+Changes made to this file; RequestHelpers\PagedList.cs; ProductsController.cs
+
 *************               Lesson 10:                **************
 *************               Lesson 10:                **************
