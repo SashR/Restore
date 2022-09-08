@@ -129,5 +129,13 @@ Changes made to this file, RequestHelpers\PaginationParams.cs; RequestHelpers\Pr
 
 Changes made to this file; RequestHelpers\PagedList.cs; ProductsController.cs
 
-*************               Lesson 10:                **************
+*************               Lesson 108: Testing out Pagination in swagger                **************
+--> If an object is passed as parameter for a request, it is assumed the object properties will be added to the body of the request
+--> If it is strings then they are treated as query stirngs
+--> We can add attribute FromQuery to alter this behavior for 1st case
+
+--> We made an extension method to more easily add response headers
+
+Changes made to this file, ProductsController, Extensions\HttpExtensions
+
 *************               Lesson 10:                **************
