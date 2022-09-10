@@ -138,4 +138,16 @@ Changes made to this file; RequestHelpers\PagedList.cs; ProductsController.cs
 
 Changes made to this file, ProductsController, Extensions\HttpExtensions
 
-*************               Lesson 10:                **************
+*************               Lesson 109: Getting the unique brands, filters as lists from the API                **************
+--> Needed to be shown on client
+--> We need a new endpoint
+--> Type IActionResult as we are not creating a type to represent data, no type safety with the response
+        [HttpGet("filter")]
+        public async Task<IActionResult> GetFilters()
+        {
+            var brands = await _context.Products.Select(p=>p.Brand).Distinct().ToListAsync();
+            var types = await _context.Products.Select(p=>p.Type).Distinct().ToListAsync();
+            return Ok(new {brands, types});
+        }
+
+Changes made to this file, ProductsController;
