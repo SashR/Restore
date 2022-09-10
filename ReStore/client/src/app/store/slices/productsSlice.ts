@@ -7,6 +7,8 @@ export interface ProductsState {
     products: Product[];
     productsLoaded: boolean;
     status: 'idle' | 'starting' | 'pendingFetchProduct' | 'pendingFetchProducts';
+    brands: ["Angular", "React"];
+    types: ["Boots", "Boards"];
 }
 
 const productsAdapter = createEntityAdapter<Product>();
@@ -38,6 +40,8 @@ const productsSlice = createSlice({
     initialState: productsAdapter.getInitialState({
         productsLoaded: false,
         status: 'idle',
+        brands: ["Angular", "React"],
+        types: ["Boots", "Boards"],
     }),
     reducers: {},
     extraReducers: (builder => {

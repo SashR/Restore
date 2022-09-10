@@ -151,3 +151,26 @@ Changes made to this file, ProductsController, Extensions\HttpExtensions
         }
 
 Changes made to this file, ProductsController;
+
+
+*************               Lesson 110: Catalog Page Design                **************
+--> Catalog page needs to be adjusted to accomodate space for filter block, pagination, etc
+--> Change layout from 4 to 3 column
+--> Working with MUI grid component
+--> Need a text field for search
+--> radio buttons for sorting (RadioGroup)
+--> Checkbox groups for brands and types filters
+--> Pagination controls also need to be added
+
+
+Changes made to this file; ProductList.tsx; Catalog.tsx
+
+*************               Lesson 11:                 **************
+*************               Lesson 11:                 **************
+*************               Lesson 11:                 **************
+*************               Lesson 11:                 **************
+*************               Lesson 11:                 **************
+*************               Lesson 11:                 **************
+*************               Lesson 11:                 **************
+*************               Lesson 11:                 **************
+*************               Lesson 11:                 **************
