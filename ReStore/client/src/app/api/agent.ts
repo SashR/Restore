@@ -1,6 +1,8 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { toast } from "react-toastify";
 import { history } from "../..";
+import { ProductParams } from "../models/product";
+import { useAppSelector } from "../store/hooks";
 
 axios.defaults.baseURL = 'http://localhost:5000/api/';
 axios.defaults.withCredentials = true;
@@ -62,8 +64,9 @@ const requests = {
 };
 
 // methods objects for requests for catalog
+// const {orderBy} = useAppSelector(state => state.products.productsParams);
 const Catalog = {
-    list: () => requests.get('products'),
+    list: ({orderBy}:ProductParams) => requests.get(`products?orderBy=${orderBy}`),
     details: (id: number) => requests.get(`products/${id}`),
 }
 

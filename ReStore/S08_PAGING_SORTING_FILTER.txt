@@ -181,7 +181,15 @@ export interface ProductParams {
 
 Changes made to this file; product.ts, productsSlice.ts
 
-*************               Lesson 11:                 **************
+*************               Lesson 113: Using params with axios get request               **************
+Attempted;
+
+
+
+
+
+Changes made to this file; productsSlice;
+
 *************               Lesson 11:                 **************
 *************               Lesson 11:                 **************
 *************               Lesson 11:                 **************

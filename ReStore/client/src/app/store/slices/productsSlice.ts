@@ -15,11 +15,11 @@ export interface ProductsState {
 
 const productsAdapter = createEntityAdapter<Product>();
 
-export const fetchProductsAsync = createAsyncThunk<Product[]>(
+export const fetchProductsAsync = createAsyncThunk<Product[], ProductParams>(
     'catalog/fetchProductsAsync',
-    async (_, thunkAPI) => {
+    async (params, thunkAPI) => {
         try {
-            return await agent.Catalog.list();
+            return await agent.Catalog.list(params);
         } catch(e: any){
             return thunkAPI.rejectWithValue({error: e.data});
         }

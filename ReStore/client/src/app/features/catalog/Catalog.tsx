@@ -1,9 +1,9 @@
 import ProductList from "./ProductList";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Box, Checkbox, FormControl, FormControlLabel, FormGroup, Grid, Pagination, Paper, Radio, RadioGroup, TextField, Typography } from "@mui/material";
 import LoadingComponent from "../../layout/LoadingComponent";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { fetchProductsAsync, productsSelectors } from "../../store/slices/productsSlice";
+import { fetchProductsAsync, productsSelectors, setProductParams } from "../../store/slices/productsSlice";
 
 const sortOptions = [
   {value: 'name', label: 'Alphabetical'},
@@ -13,12 +13,23 @@ const sortOptions = [
 
 const Catalog = () => {
     const {productsLoaded, status , brands, types} = useAppSelector(state => state.products);
+    const params = useAppSelector(state => state.products.productsParams);
     const products = useAppSelector(productsSelectors.selectAll);
     const dispatch = useAppDispatch();
 
+    // Sorting; filtering; paging
+    const reOrder = (ev: any) => {
+      dispatch(setProductParams({orderBy: ev.target.value}));
+      dispatch(fetchProductsAsync(params));
+    };
+    const reSearch = (ev: any) => {
+      dispatch(setProductParams({searchString: ev.target.value}));
+      dispatch(fetchProductsAsync(params));
+    };
+
   // Call for data from server, no dependencies
     useEffect(()=>{ 
-      if(!productsLoaded) dispatch(fetchProductsAsync())
+      if(!productsLoaded) dispatch(fetchProductsAsync(params))
     }, [productsLoaded, dispatch]);
 
     if(status === 'pendingFetchProducts') return <LoadingComponent message="Loading products ..." />;
@@ -33,7 +44,7 @@ const Catalog = () => {
           {/* Sort by  */}
           <Paper sx={{mb:2, p:2}}>
             <FormControl>
-              <RadioGroup>
+              <RadioGroup value={params.orderBy} onChange={reOrder}>
                 {sortOptions.map(({value, label}) => (
                   <FormControlLabel key={value} value={value} control={<Radio />} label={label} />
                 ))}
