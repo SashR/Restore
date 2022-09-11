@@ -39,7 +39,7 @@ const Catalog = () => {
         <Grid item xs={3}>
           {/* Search */}
           <Paper sx={{mb:2}}>
-            <TextField label='Search products' variant='outlined' fullWidth />
+            <TextField value={params.searchString} onChange={reSearch} label='Search products' variant='outlined' fullWidth />
           </Paper>
           {/* Sort by  */}
           <Paper sx={{mb:2, p:2}}>

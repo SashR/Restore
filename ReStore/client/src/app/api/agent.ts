@@ -66,7 +66,8 @@ const requests = {
 // methods objects for requests for catalog
 // const {orderBy} = useAppSelector(state => state.products.productsParams);
 const Catalog = {
-    list: ({orderBy}:ProductParams) => requests.get(`products?orderBy=${orderBy}`),
+    list: ({orderBy, searchString}:ProductParams) => requests.get(`products?orderBy=${orderBy}
+    ${!searchString ? "" : "&searchString="+ searchString}`),
     details: (id: number) => requests.get(`products/${id}`),
 }
 
