@@ -1,6 +1,6 @@
 import ProductList from "./ProductList";
 import { useEffect } from "react";
-import { Box, Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel, Grid, Pagination, Paper, Radio, RadioGroup, TextField, Typography } from "@mui/material";
+import { Box, Checkbox, FormControl, FormControlLabel, FormGroup, Grid, Pagination, Paper, Radio, RadioGroup, TextField, Typography } from "@mui/material";
 import LoadingComponent from "../../layout/LoadingComponent";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { fetchProductsAsync, productsSelectors } from "../../store/slices/productsSlice";

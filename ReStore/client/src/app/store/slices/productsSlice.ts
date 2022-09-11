@@ -1,14 +1,16 @@
 import { createAsyncThunk, createEntityAdapter, createSlice } from "@reduxjs/toolkit";
 import agent from "../../api/agent";
-import { Product } from "../../models/product";
+import { Product, ProductParams } from "../../models/product";
 import { RootState } from "../store";
 
 export interface ProductsState {
     products: Product[];
     productsLoaded: boolean;
+    filtersLoaded: boolean;
     status: 'idle' | 'starting' | 'pendingFetchProduct' | 'pendingFetchProducts';
-    brands: ["Angular", "React"];
-    types: ["Boots", "Boards"];
+    brands: string[];
+    types: string[];
+    productsParams: ProductParams;
 }
 
 const productsAdapter = createEntityAdapter<Product>();
@@ -35,15 +37,35 @@ export const fetchProductAsync = createAsyncThunk<Product, number>(
     }
 )
 
+// Initial params for product params
+const initParams = () => {
+    return {
+        pageNumber: 1,
+        pageSize: 6,
+        orderBy: 'name',
+    }
+}
+
 const productsSlice = createSlice({
     name: 'products',
-    initialState: productsAdapter.getInitialState({
+    initialState: productsAdapter.getInitialState<ProductsState>({
         productsLoaded: false,
+        products: [],
+        filtersLoaded: false,
         status: 'idle',
         brands: ["Angular", "React"],
         types: ["Boots", "Boards"],
+        productsParams: initParams()
     }),
-    reducers: {},
+    reducers: {
+        setProductParams: (state, action) => {
+            state.productsLoaded = false;
+            state.productsParams = {...state.productsParams, ...action.payload};
+        },
+        resetProductParams: (state) => {
+            state.productsParams = initParams();
+        }
+    },
     extraReducers: (builder => {
         builder.addCase(fetchProductsAsync.pending, (state) => {
             state.status = 'pendingFetchProducts';
@@ -73,4 +95,5 @@ const productsSlice = createSlice({
 });
 
 export const productsSelectors = productsAdapter.getSelectors((state:RootState)=> state.products);
+export const {setProductParams, resetProductParams} = productsSlice.actions;
 export default productsSlice.reducer;

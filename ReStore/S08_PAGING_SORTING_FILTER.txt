@@ -165,7 +165,22 @@ Changes made to this file, ProductsController;
 
 Changes made to this file; ProductList.tsx; Catalog.tsx
 
-*************               Lesson 11:                 **************
+*************               Lesson 112: Adding the products params to the redux state                 **************
+--> Need to create state to store parameters for query string
+--> Created interface in product.ts file to hold params
+export interface ProductParams {
+    orderBy: string;
+    searchString?: string;
+    types?: string[];
+    brands?: string[];
+    pageNumber: number;
+    pageSize: number;
+}
+
+--> We then need to create state and pass params to request inside productsSlice.ts
+
+Changes made to this file; product.ts, productsSlice.ts
+
 *************               Lesson 11:                 **************
 *************               Lesson 11:                 **************
 *************               Lesson 11:                 **************
