@@ -74,7 +74,7 @@ const productsSlice = createSlice({
     reducers: {
         setProductParams: (state, action) => {
             console.log("SETPRODUCTPARAMS", state, action)
-            // state.productsLoaded = false;
+            state.productsLoaded = false;
             state.productsParams = {...state.productsParams, ...action.payload};
         },
         resetProductParams: (state) => {
