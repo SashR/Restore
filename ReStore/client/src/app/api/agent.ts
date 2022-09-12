@@ -64,7 +64,7 @@ const requests = {
 
 // methods objects for requests for catalog
 const Catalog = {
-    list: (params: URLSearchParams) => requests.get('products'),
+    list: (params: URLSearchParams) => requests.get('products',params),
     details: (id: number) => requests.get(`products/${id}`),
 }
 

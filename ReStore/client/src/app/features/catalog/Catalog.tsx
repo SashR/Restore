@@ -1,9 +1,10 @@
 import ProductList from "./ProductList";
 import { useEffect } from "react";
-import { Box, Checkbox, FormControl, FormControlLabel, FormGroup, Grid, Pagination, Paper, Radio, RadioGroup, TextField, Typography } from "@mui/material";
+import { Box, Checkbox, FormControl, FormControlLabel, FormGroup, Grid, Pagination, Paper, Radio, RadioGroup, Typography } from "@mui/material";
 import LoadingComponent from "../../layout/LoadingComponent";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { fetchProductsAsync, productsSelectors, setProductParams } from "../../store/slices/productsSlice";
+import { fetchProductsAsync, productsSelectors } from "../../store/slices/productsSlice";
+import ProductSearch from "./ProductSearch";
 
 const sortOptions = [
   {value: 'name', label: 'Alphabetical'},
@@ -35,7 +36,7 @@ const Catalog = () => {
         <Grid item xs={3}>
           {/* Search */}
           <Paper sx={{mb:2}}>
-            <TextField label='Search products' variant='outlined' fullWidth />
+            <ProductSearch />
           </Paper>
           {/* Order by  */}
           <Paper sx={{mb:2, p:2}}>

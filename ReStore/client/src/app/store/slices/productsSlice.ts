@@ -31,6 +31,7 @@ export const fetchProductsAsync = createAsyncThunk<Product[], void, {state: Root
     'catalog/fetchProductsAsync',
     async (_, thunkAPI) => {
         const params = getAxiosParams((thunkAPI.getState().products.productsParams));
+        console.log(params);
         try {
             return await agent.Catalog.list(params);
         } catch(e: any){
@@ -72,7 +73,8 @@ const productsSlice = createSlice({
     }),
     reducers: {
         setProductParams: (state, action) => {
-            state.productsLoaded = false;
+            console.log("SETPRODUCTPARAMS", state, action)
+            // state.productsLoaded = false;
             state.productsParams = {...state.productsParams, ...action.payload};
         },
         resetProductParams: (state) => {

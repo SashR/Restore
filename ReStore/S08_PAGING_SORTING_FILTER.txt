@@ -187,7 +187,11 @@ Changes made to this file; product.ts, productsSlice.ts
 --> Check code in agent.ts; simplifies adding querying string key value pairs
 
 Changes made to this file; agent.ts; Catalog.TSX; productsSlice.ts
-*************               Lesson 11:                 **************
+
+*************               Lesson 114: Search functionality for the client                 **************
+
+Changes made to this file; Catalog.tsx; productSearch.tsx
+
 *************               Lesson 11:                 **************
 *************               Lesson 11:                 **************
 *************               Lesson 11:                 **************
