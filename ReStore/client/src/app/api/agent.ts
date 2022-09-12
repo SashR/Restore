@@ -2,7 +2,6 @@ import axios, { AxiosError, AxiosResponse } from "axios";
 import { toast } from "react-toastify";
 import { history } from "../..";
 import { ProductParams } from "../models/product";
-import { useAppSelector } from "../store/hooks";
 
 axios.defaults.baseURL = 'http://localhost:5000/api/';
 axios.defaults.withCredentials = true;
@@ -57,17 +56,15 @@ const responseBody = (response: AxiosResponse) => response.data;
 
 // methods object for crud commands
 const requests = {
-    get: async (url: string) => responseBody(await axios.get(url)),
+    get: async (url: string, params?: URLSearchParams) => responseBody(await axios.get(url, {params})),
     post: async (url: string, body: {}) => responseBody(await axios.post(url, body)),
     put: async (url: string, body: {}) => responseBody(await axios.put(url, body)),
     delete: async (url: string) => responseBody(await axios.delete(url)),
 };
 
 // methods objects for requests for catalog
-// const {orderBy} = useAppSelector(state => state.products.productsParams);
 const Catalog = {
-    list: ({orderBy, searchString}:ProductParams) => requests.get(`products?orderBy=${orderBy}
-    ${!searchString ? "" : "&searchString="+ searchString}`),
+    list: (params: URLSearchParams) => requests.get('products'),
     details: (id: number) => requests.get(`products/${id}`),
 }
 

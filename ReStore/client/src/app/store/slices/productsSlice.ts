@@ -15,9 +15,22 @@ export interface ProductsState {
 
 const productsAdapter = createEntityAdapter<Product>();
 
-export const fetchProductsAsync = createAsyncThunk<Product[], ProductParams>(
+// 
+const getAxiosParams = (productParams: ProductParams) => {
+    const params = new URLSearchParams();
+    params.append('pageNumber', productParams.pageNumber.toString());
+    params.append('pageSize', productParams.pageSize.toString());
+    params.append('orderBy', productParams.orderBy);
+    if(productParams.searchString) params.append('searchString', productParams.searchString);
+    if(productParams.brands) params.append('brands', productParams.brands.toString());
+    if(productParams.types) params.append('types', productParams.types.toString());
+    return params;
+}
+
+export const fetchProductsAsync = createAsyncThunk<Product[], void, {state: RootState}>(
     'catalog/fetchProductsAsync',
-    async (params, thunkAPI) => {
+    async (_, thunkAPI) => {
+        const params = getAxiosParams((thunkAPI.getState().products.productsParams));
         try {
             return await agent.Catalog.list(params);
         } catch(e: any){
@@ -42,7 +55,7 @@ const initParams = () => {
     return {
         pageNumber: 1,
         pageSize: 6,
-        orderBy: 'name'
+        orderBy: 'name',
     }
 }
 

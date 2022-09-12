@@ -1,5 +1,5 @@
 import ProductList from "./ProductList";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Box, Checkbox, FormControl, FormControlLabel, FormGroup, Grid, Pagination, Paper, Radio, RadioGroup, TextField, Typography } from "@mui/material";
 import LoadingComponent from "../../layout/LoadingComponent";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
@@ -12,25 +12,21 @@ const sortOptions = [
 ]
 
 const Catalog = () => {
-    const {productsLoaded, status , brands, types} = useAppSelector(state => state.products);
-    const params = useAppSelector(state => state.products.productsParams);
+    const {productsLoaded, status , brands, types, productsParams: params} = useAppSelector(state => state.products);
     const products = useAppSelector(productsSelectors.selectAll);
     const dispatch = useAppDispatch();
 
-    // Sorting; filtering; paging
-    const reOrder = (ev: any) => {
-      dispatch(setProductParams({orderBy: ev.target.value}));
-      dispatch(fetchProductsAsync(params));
-    };
-    const reSearch = (ev: any) => {
-      dispatch(setProductParams({searchString: ev.target.value}));
-      dispatch(fetchProductsAsync(params));
-    };
+    // Filtering, sorting, paging
+    // const order = (type:string, ev:any) => {
+    //   console.log(ev, type);
+    //   if(type==="orderBy") setProductParams({...params, orderBy:ev.target.value});
+    //   dispatch(fetchProductsAsync(params));
+    // } 
 
   // Call for data from server, no dependencies
     useEffect(()=>{ 
-      if(!productsLoaded) dispatch(fetchProductsAsync(params))
-    }, [productsLoaded, dispatch]);
+      if(!productsLoaded) dispatch(fetchProductsAsync())
+    }, [productsLoaded, dispatch, params]);
 
     if(status === 'pendingFetchProducts') return <LoadingComponent message="Loading products ..." />;
 
@@ -39,12 +35,12 @@ const Catalog = () => {
         <Grid item xs={3}>
           {/* Search */}
           <Paper sx={{mb:2}}>
-            <TextField value={params.searchString} onChange={reSearch} label='Search products' variant='outlined' fullWidth />
+            <TextField label='Search products' variant='outlined' fullWidth />
           </Paper>
-          {/* Sort by  */}
+          {/* Order by  */}
           <Paper sx={{mb:2, p:2}}>
             <FormControl>
-              <RadioGroup value={params.orderBy} onChange={reOrder}>
+              <RadioGroup>
                 {sortOptions.map(({value, label}) => (
                   <FormControlLabel key={value} value={value} control={<Radio />} label={label} />
                 ))}

@@ -181,15 +181,12 @@ export interface ProductParams {
 
 Changes made to this file; product.ts, productsSlice.ts
 
-*************               Lesson 113: Using params with axios get request               **************
-Attempted;
+*************               Lesson 113: Axios get request to use the params                 **************
+--> Attempted, shit
 
+--> Check code in agent.ts; simplifies adding querying string key value pairs
 
-
-
-
-Changes made to this file; productsSlice;
-
+Changes made to this file; agent.ts; Catalog.TSX; productsSlice.ts
 *************               Lesson 11:                 **************
 *************               Lesson 11:                 **************
 *************               Lesson 11:                 **************
