@@ -1,11 +1,12 @@
 import ProductList from "./ProductList";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Box, Checkbox, FormControlLabel, FormGroup, Grid, Pagination, Paper, Typography } from "@mui/material";
 import LoadingComponent from "../../layout/LoadingComponent";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { fetchFiltersAsync, fetchProductsAsync, productsSelectors, setProductParams } from "../../store/slices/productsSlice";
 import ProductSearch from "./ProductSearch";
 import RadioButtonGroup from "../../../components/RadioButtonGroup";
+import CheckboxButtonGroup from "../../../components/CheckboxButtonGroup";
 
 const sortOptions = [
   {value: 'name', label: 'Alphabetical'},
@@ -18,13 +19,12 @@ const Catalog = () => {
     const products = useAppSelector(productsSelectors.selectAll);
     const dispatch = useAppDispatch();
 
-    // Filtering, sorting, paging
-    // const order = (type:string, ev:any) => {
-    //   console.log(ev, type);
-    //   if(type==="orderBy") setProductParams({...params, orderBy:ev.target.value});
-    //   dispatch(fetchProductsAsync(params));
-    // } 
-
+    const [selBrands, setSelBrands] = useState((new Array(brands.length)).fill(false));
+    const togBrands = (i:number) => {
+      const brandsFilters = [...selBrands.slice(0,i),!selBrands[i],...selBrands.slice(i+1,selBrands.length)];
+      dispatch(setProductParams({brands: brands.filter((_,i)=>brandsFilters[i])}));
+      setSelBrands(brandsFilters);
+    };
   // Call for data from server, no dependencies
     useEffect(()=>{ 
       if(!productsLoaded) {
@@ -52,9 +52,10 @@ const Catalog = () => {
           </Paper>
           {/* Filter by */}
           <Paper sx={{mb:2, p:2}}>
-            <FormGroup>
+            <CheckboxButtonGroup options={brands} toggle={(i:number)=>togBrands(i)} />
+            {/* <FormGroup>
               {brands.map(b => <FormControlLabel key={b} control={<Checkbox/>} label={b} name='brands' />)}
-            </FormGroup>
+            </FormGroup> */}
           </Paper>
           <Paper sx={{mb:2, p:2}}>
             <FormGroup>
