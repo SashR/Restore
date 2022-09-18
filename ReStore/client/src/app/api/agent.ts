@@ -65,6 +65,7 @@ const requests = {
 const Catalog = {
     list: (params: URLSearchParams) => requests.get('products',params),
     details: (id: number) => requests.get(`products/${id}`),
+    filters: () => requests.get('products/filter')
 }
 
 // Basket methods

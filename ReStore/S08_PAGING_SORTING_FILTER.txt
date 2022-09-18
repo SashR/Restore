@@ -197,7 +197,11 @@ Changes made to this file; Catalog.tsx; productSearch.tsx
 
 Changes made to this file; \component\RadioButtonGroup.tsx; Catalog.tsx;
 
-*************               Lesson 11:                 **************
+*************               Lesson 116: Filter Functionality for the client                 **************
+--> Attempted
+
+Changes made to this file;
+
 *************               Lesson 11:                 **************
 *************               Lesson 11:                 **************
 *************               Lesson 11:                 **************

@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { Box, Checkbox, FormControlLabel, FormGroup, Grid, Pagination, Paper, Typography } from "@mui/material";
 import LoadingComponent from "../../layout/LoadingComponent";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { fetchProductsAsync, productsSelectors, setProductParams } from "../../store/slices/productsSlice";
+import { fetchFiltersAsync, fetchProductsAsync, productsSelectors, setProductParams } from "../../store/slices/productsSlice";
 import ProductSearch from "./ProductSearch";
 import RadioButtonGroup from "../../../components/RadioButtonGroup";
 
@@ -27,7 +27,10 @@ const Catalog = () => {
 
   // Call for data from server, no dependencies
     useEffect(()=>{ 
-      if(!productsLoaded) dispatch(fetchProductsAsync())
+      if(!productsLoaded) {
+        dispatch(fetchFiltersAsync());
+        dispatch(fetchProductsAsync());
+      }
     }, [productsLoaded, dispatch, params]);
 
     if(status === 'pendingFetchProducts') return <LoadingComponent message="Loading products ..." />;
@@ -50,7 +53,7 @@ const Catalog = () => {
           {/* Filter by */}
           <Paper sx={{mb:2, p:2}}>
             <FormGroup>
-              {brands.map(b => <FormControlLabel key={b} control={<Checkbox/>} label={b} />)}
+              {brands.map(b => <FormControlLabel key={b} control={<Checkbox/>} label={b} name='brands' />)}
             </FormGroup>
           </Paper>
           <Paper sx={{mb:2, p:2}}>
