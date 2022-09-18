@@ -55,7 +55,7 @@ function App() {
   const dispatch = useAppDispatch();
   const {status} = useAppSelector(store => store.basket);
 
-  const [theme, setTheme] = useState<Boolean>(false);
+  const [theme, setTheme] = useState<Boolean>(true);
 
   // Change
   const onChangeTheme = () => {

@@ -1,10 +1,11 @@
 import ProductList from "./ProductList";
 import { useEffect } from "react";
-import { Box, Checkbox, FormControl, FormControlLabel, FormGroup, Grid, Pagination, Paper, Radio, RadioGroup, Typography } from "@mui/material";
+import { Box, Checkbox, FormControlLabel, FormGroup, Grid, Pagination, Paper, Typography } from "@mui/material";
 import LoadingComponent from "../../layout/LoadingComponent";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { fetchProductsAsync, productsSelectors } from "../../store/slices/productsSlice";
+import { fetchProductsAsync, productsSelectors, setProductParams } from "../../store/slices/productsSlice";
 import ProductSearch from "./ProductSearch";
+import RadioButtonGroup from "../../../components/RadioButtonGroup";
 
 const sortOptions = [
   {value: 'name', label: 'Alphabetical'},
@@ -40,13 +41,11 @@ const Catalog = () => {
           </Paper>
           {/* Order by  */}
           <Paper sx={{mb:2, p:2}}>
-            <FormControl>
-              <RadioGroup>
-                {sortOptions.map(({value, label}) => (
-                  <FormControlLabel key={value} value={value} control={<Radio />} label={label} />
-                ))}
-              </RadioGroup>
-            </FormControl>
+            <RadioButtonGroup 
+              options={sortOptions} 
+              selectedValue={params.orderBy}  
+              onChange={(event:any)=>{dispatch(setProductParams({orderBy: event.target.value}))}}
+            />
           </Paper>
           {/* Filter by */}
           <Paper sx={{mb:2, p:2}}>

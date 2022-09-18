@@ -192,7 +192,11 @@ Changes made to this file; agent.ts; Catalog.TSX; productsSlice.ts
 
 Changes made to this file; Catalog.tsx; productSearch.tsx
 
-*************               Lesson 11:                 **************
+*************               Lesson 115: Sort functionality for the client                  **************
+--> Need a component for a list of radio buttons
+
+Changes made to this file; \component\RadioButtonGroup.tsx; Catalog.tsx;
+
 *************               Lesson 11:                 **************
 *************               Lesson 11:                 **************
 *************               Lesson 11:                 **************
